@@ -148,6 +148,7 @@
     <ClCompile Include="Meteorite.cpp" />
     <ClCompile Include="MeteRange.cpp" />
     <ClCompile Include="Object.cpp" />
+    <ClCompile Include="Path.cpp" />
     <ClCompile Include="PlayerMgr.cpp" />
     <ClCompile Include="SceneMgr.cpp" />
     <ClCompile Include="SkyBox.cpp" />
@@ -176,6 +177,7 @@
     <ClInclude Include="Meteorite.h" />
     <ClInclude Include="MeteRange.h" />
     <ClInclude Include="Object.h" />
+    <ClInclude Include="Path.h" />
     <ClInclude Include="PlayerMgr.h" />
     <ClInclude Include="SceneMgr.h" />
     <ClInclude Include="SkyBox.h" />

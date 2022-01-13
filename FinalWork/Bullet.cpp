@@ -1,5 +1,7 @@
 #include "Bullet.h"
 #include "PlayerMgr.h"
+#include"TimeMgr.h"
+#include "CVector.h"
 
 //设置射程
 double Bullet::shootRange = 240;
@@ -27,6 +29,7 @@ Bullet::Bullet()
 	this->maxXYZ
 	this->minXYZ
 	*/
+	path.update_path(this->transform->position);
 }
 
 Bullet::~Bullet()
@@ -55,11 +58,13 @@ void Bullet::DrawBullet() {
 //每次移动之后需判断是否超过射程
 void Bullet::Move() {
 	//获取子弹的前方单位向量 forward
-
+	CVector forward = this->transform->rotation.ToCMatrix().vecMul(CVector(0, 0, 1));//???
 	//this->transform->position += forward * moveSpeed * TimeMgr::deltaTime
-
+	this->transform->position = this->transform->position 
+								+ forward * moveSpeed * TimeMgr::deltaTime;
+	path.update_path(this->transform->position);
 	//判断是否超过射程,是则删除
-
+	//todo
 }
 
 //override
