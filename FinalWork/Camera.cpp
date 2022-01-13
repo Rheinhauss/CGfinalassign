@@ -20,79 +20,96 @@ Camera::~Camera()
 
 //摄像机移动
 void Camera::Move() {
+	//???
 	if (InputManager::KEY_W) {
 		//获取摄像机的up单位向量
-
 		//当前位置  加上 up * moveSpeed * TimeMgr::deltaTime
+		this->transform->position = this->transform->position + _up() * moveSpeed * TimeMgr::deltaTime;
 	}
 	if (InputManager::KEY_S) {
 		//获取摄像机的up单位向量
-
 		//当前位置  减去 up * moveSpeed * TimeMgr::deltaTime
+		this->transform->position = this->transform->position - _up() * moveSpeed * TimeMgr::deltaTime;
 	}
 	if (InputManager::KEY_A) {
 		//获取摄像机的left单位向量
-
 		//当前位置  加上 left * moveSpeed * TimeMgr::deltaTime
+		this->transform->position = this->transform->position + _left() * moveSpeed * TimeMgr::deltaTime;
 	}
 	if (InputManager::KEY_D) {
 		//获取摄像机的left单位向量
-
 		//当前位置  减去 left * moveSpeed * TimeMgr::deltaTime
+		this->transform->position = this->transform->position - _left() * moveSpeed * TimeMgr::deltaTime;
 	}
 	if (InputManager::KEY_Q) {
 		//获取摄像机的forward单位向量
-
 		//当前位置  加上 forward * moveSpeed * TimeMgr::deltaTime
+		this->transform->position = this->transform->position + _forward() * moveSpeed * TimeMgr::deltaTime;
 	}
 	if (InputManager::KEY_E) {
 		//获取摄像机的forward单位向量
-
 		//当前位置  减去 forward * moveSpeed * TimeMgr::deltaTime
+		this->transform->position = this->transform->position - _forward() * moveSpeed * TimeMgr::deltaTime;
 	}
 }
 //摄像机旋转
 void Camera::Rotate() {
+	//??? 左乘吗?以及顺逆时针是否写对
 	if (InputManager::KEY_J) {
 		//获取摄像机的up单位向量
-
 		//绕 up 轴 顺时针旋转 rotSpeed * TimeMgr::deltaTime
+		CMatrix _m;
+		_m.SetRotate(rotSpeed * TimeMgr::deltaTime, _up());
+		this->transform->rotation = _m.ToCQuaternion() * this->transform->rotation;
 	}
 	if (InputManager::KEY_L) {
 		//获取摄像机的up单位向量
-
 		//绕 up 轴 逆时针旋转 rotSpeed * TimeMgr::deltaTime
+		CMatrix _m;
+		_m.SetRotate(-rotSpeed * TimeMgr::deltaTime, _up());
+		this->transform->rotation = _m.ToCQuaternion() * this->transform->rotation;
 	}
 	if (InputManager::KEY_K) {
 		//获取摄像机的left单位向量
-
 		//绕 left 轴 顺时针旋转 rotSpeed * TimeMgr::deltaTime
+		CMatrix _m;
+		_m.SetRotate(rotSpeed * TimeMgr::deltaTime, _left());
+		this->transform->rotation = _m.ToCQuaternion() * this->transform->rotation;
 	}
 	if (InputManager::KEY_I) {
 		//获取摄像机的left单位向量
-
 		//绕 left 轴 逆时针旋转 rotSpeed * TimeMgr::deltaTime
+		CMatrix _m;
+		_m.SetRotate(-rotSpeed * TimeMgr::deltaTime, _left());
+		this->transform->rotation = _m.ToCQuaternion() * this->transform->rotation;
 	}
 	if (InputManager::KEY_U) {
 		//获取摄像机的forward单位向量
-
 		//绕 forward 轴 逆时针旋转 rotSpeed * TimeMgr::deltaTime
+		CMatrix _m;
+		_m.SetRotate(rotSpeed * TimeMgr::deltaTime, _forward());
+		this->transform->rotation = _m.ToCQuaternion() * this->transform->rotation;
 	}
 	if (InputManager::KEY_O) {
 		//获取摄像机的forward单位向量
-
 		//绕 forward 轴 顺时针旋转 rotSpeed * TimeMgr::deltaTime
+		CMatrix _m;
+		_m.SetRotate(-rotSpeed * TimeMgr::deltaTime, _forward());
+		this->transform->rotation = _m.ToCQuaternion() * this->transform->rotation;
 	}
 }
 //更改模式
 void Camera::ChangePattern() {
 	if (InputManager::KEY_X) {
-		//过渡阶段
-		//不可更改飞机模式
+		//过渡阶段 不可更改飞机模式
+		//非过渡阶段 可更改飞机的模式
+		if (is_allow_changing_pattern) {
+			is_allow_changing_pattern = false;
+		}
 
-		//非过渡阶段
-		//可更改飞机的模式
+		bool former_pattern = PlayerMgr::Player->pattern;
 		PlayerMgr::Player->pattern = !PlayerMgr::Player->pattern;
+		//todo_ssh 视角切换平滑过渡
 		//如果是 驾驶模式 ->上帝视角模式,将摄像机Transform设置为绝对变换
 		//置过渡态为true
 
@@ -122,4 +139,14 @@ void Camera::Update() {
 	Move();
 	Rotate();
 	ChangePattern();
+}
+
+CVector Camera::_up() {
+	return this->transform->rotation.ToCMatrix().vecMul(CVector(0, 1, 0));
+}
+CVector Camera::_left() {
+	return this->transform->rotation.ToCMatrix().vecMul(CVector(1, 0, 0));
+}
+CVector Camera::_forward() {
+	return this->transform->rotation.ToCMatrix().vecMul(CVector(0, 0, 1));
 }

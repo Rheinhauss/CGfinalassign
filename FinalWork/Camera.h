@@ -22,6 +22,11 @@ private:
 	void Rotate();
 	//更改模式
 	void ChangePattern();
+	CVector _up();
+	CVector _left();
+	CVector _forward();
+
+	bool is_allow_changing_pattern = true;
 
 };
 
