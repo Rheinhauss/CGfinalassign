@@ -170,6 +170,7 @@ void Update() {
 	for (int i = 0; i < len; ++i) {
 		Object::objs[i]->Update();
 	}
+	DestroyMgr::DestroyObj();
 }
 void myReshape(int w, int h) {
 	GLfloat nRange = 100.0f;

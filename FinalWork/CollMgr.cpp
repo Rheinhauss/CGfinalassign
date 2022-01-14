@@ -1,6 +1,6 @@
 #include "CollMgr.h"
 #include "SceneMgr.h"
-
+#include"DestroyMgr.h"
 CollMgr::CollMgr()
 {
 }
@@ -115,5 +115,5 @@ void CollMgr::CollisionDetec() {
 }
 //É¾³ýÅö×²Æ÷
 void CollMgr::DestroyCollider(Collider* col) {
-	delete col;
+	DestroyMgr::add(col);
 }

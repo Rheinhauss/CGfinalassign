@@ -11,7 +11,7 @@ public:
 
 	//发射点,即发射时的位置,用于判断是否超过射程,实现trail效果,可将trail效果写成一个组件component
 	CVector point;
-	Path path;
+	Path *path;
 
 	//override
 	void Render();
