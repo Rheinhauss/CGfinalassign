@@ -1,4 +1,5 @@
 #include "MeteMgr.h"
+#include "DestroyMgr.h"
 
 MeteMgr::MeteMgr()
 {
@@ -14,7 +15,7 @@ vector<Meteorite*> MeteMgr::Metes;
 vector<MeteRange*> MeteMgr::MeteRanges;
 //删除陨石
 void MeteMgr::DestroyMete(Meteorite* m) {
-	delete m;
+	DestroyMgr::add(m);
 }
 //初始化边界和陨石
 void MeteMgr::Init() {

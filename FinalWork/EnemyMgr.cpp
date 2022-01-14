@@ -1,5 +1,6 @@
 #include "EnemyMgr.h"
 #include "SceneMgr.h"
+#include "DestroyMgr.h"
 
 EnemyMgr::EnemyMgr()
 {
@@ -41,7 +42,7 @@ void EnemyMgr::CreateEnemy() {
 }
 //删除敌机
 void EnemyMgr::DestroyEnemy(Enemy* e) {
-	delete e;
+	DestroyMgr::add(e);
 }
 
 //初始化,开始生成一定数量敌机生成点和敌机

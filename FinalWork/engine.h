@@ -30,3 +30,4 @@ using namespace std;
 #include "TimeMgr.h"
 #include "Timer.h"
 #include "InputManager.h"
+#include "DestroyMgr.h"

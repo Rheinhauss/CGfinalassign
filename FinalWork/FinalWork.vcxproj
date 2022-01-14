@@ -138,6 +138,7 @@
     <ClCompile Include="CollMgr.cpp" />
     <ClCompile Include="CQuaternion.cpp" />
     <ClCompile Include="CVector.cpp" />
+    <ClCompile Include="DestroyMgr.cpp" />
     <ClCompile Include="Earth.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EnemyMgr.cpp" />
@@ -167,6 +168,7 @@
     <ClInclude Include="CollMgr.h" />
     <ClInclude Include="CQuaternion.h" />
     <ClInclude Include="CVector.h" />
+    <ClInclude Include="DestroyMgr.h" />
     <ClInclude Include="Earth.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EnemyMgr.h" />

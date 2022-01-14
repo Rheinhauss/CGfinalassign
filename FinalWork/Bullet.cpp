@@ -4,7 +4,7 @@
 #include "CVector.h"
 
 //设置射程
-double Bullet::shootRange = 240;
+double Bullet::shootRange = 100;
 
 Bullet::Bullet()
 {
@@ -15,7 +15,7 @@ Bullet::Bullet()
 	//设置标签
 	this->tag = "bullet";
 	//设置速度
-	this->moveSpeed = 40;
+	this->moveSpeed = 20;
 	//设置发射点,用于判断是否超过射程
 	this->point = PlayerMgr::Player->transform->position;
 	//初始化子弹的Transform
@@ -29,9 +29,10 @@ Bullet::Bullet()
 	this->maxXYZ
 	this->minXYZ
 	*/
-	this->maxXYZ = CVector(1, 1, 1);
+	this->maxXYZ = CVector(0.5, 0.5, 0.5);
 	this->minXYZ = CVector(0, 0, 0);
-	path.update_path(this->transform->position);
+	path = new Path;
+	path->update_path(this->transform->position);
 }
 
 Bullet::~Bullet()
@@ -56,7 +57,7 @@ Bullet::~Bullet()
 void Bullet::DrawBullet() {
 	//绘制子弹 + 纹理
 	glPushMatrix();
-	glutSolidSphere(1, 10, 10);
+	glutSolidSphere(0.5, 10, 10);
 	glPopMatrix();
 }
 
@@ -67,7 +68,7 @@ void Bullet::Move() {
 	//this->transform->position += forward * moveSpeed * TimeMgr::deltaTime
 	this->transform->position = this->transform->position 
 								+ forward * moveSpeed * TimeMgr::deltaTime;
-	path.update_path(this->transform->position);
+	this->path->update_path(this->transform->position);
 	//判断是否超过射程,是则删除
 	if (Object::distance(*this, this->point) > shootRange)
 		delete this;

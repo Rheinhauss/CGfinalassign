@@ -96,6 +96,9 @@
     <ClCompile Include="Path.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="DestroyMgr.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SkyBox.h">
@@ -177,6 +180,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Path.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="DestroyMgr.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

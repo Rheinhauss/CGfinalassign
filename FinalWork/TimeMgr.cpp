@@ -1,5 +1,6 @@
 #include "TimeMgr.h"
 #include "iostream"
+#include "DestroyMgr.h"
 
 TimeMgr::TimeMgr()
 {
@@ -33,5 +34,5 @@ void TimeMgr::TIMER() {
 }
 //É¾³ý¼ÆÊ±Æ÷
 void TimeMgr::DestroyTimer(Timer* t) {
-	delete t;
+	DestroyMgr::add(t);
 }

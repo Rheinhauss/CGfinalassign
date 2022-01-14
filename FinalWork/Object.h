@@ -9,7 +9,7 @@ class Object
 {
 public:
 	Object();
-	~Object();
+	virtual ~Object();
 
 	//ÎïÌåÃû³Æ
 	string name;
