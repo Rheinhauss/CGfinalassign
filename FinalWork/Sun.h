@@ -1,5 +1,6 @@
 #pragma once
 #include "Collider.h"
+#include "CVector.h"
 
 class Sun : public Collider
 {
@@ -10,6 +11,7 @@ public:
 	void Render();
 	//°ë¾¶
 	double radius;
+	static CVector pos;
 
 private:
 	//»æÖÆÌ«ÑôÇòÌå+ÌùÉÏÎÆÀíÌùÍ¼

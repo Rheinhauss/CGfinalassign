@@ -53,12 +53,12 @@ void CollMgr::CollisionDetec() {
 					CVector((*it)->maxXYZ.x, (*it)->maxXYZ.y, (*it)->minXYZ.z),
 					CVector((*it)->maxXYZ.x, (*it)->maxXYZ.y, (*it)->maxXYZ.z),
 				};
-
 				CMatrix m = (*it)->transform->rotation.ToCMatrix();
 				for (int i = 0; i < 8; ++i) {
 					PA[i] = m.posMul(PA[i]);
 					PA[i] = PA[i] + (*it)->transform->position;
 					if ((PA[i] - SceneMgr::earth->transform->position).len() <= SceneMgr::earth->radius) {
+						cout << "it2 = earth" << endl; 
 						(*it)->Collision(*it2);
 					}
 				}
@@ -80,6 +80,7 @@ void CollMgr::CollisionDetec() {
 					PA[i] = m.posMul(PA[i]);
 					PA[i] = PA[i] + (*it2)->transform->position;
 					if ((PA[i] - SceneMgr::earth->transform->position).len() <= SceneMgr::earth->radius) {
+						cout << "it1 = earth" << endl; 
 						(*it2)->Collision(*it);
 					}
 				}

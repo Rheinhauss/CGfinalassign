@@ -18,6 +18,7 @@ public:
 
 	//·µ»ØËæ»úÊı
 	static double random();
+	static int randint();
 
 private:
 

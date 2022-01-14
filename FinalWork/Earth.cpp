@@ -1,5 +1,6 @@
 #include "Earth.h"
 #include"glut.h"
+#include "Sun.h"
 Earth::Earth()
 {
 	this->name = "earth";
@@ -20,15 +21,20 @@ void Earth::DrawEarth() {
 }
 //绕太阳旋转
 void Earth::Move() {
+	pub_seta += 0.3;
+	this->transform->position = CVector(cos(pub_seta / 180 * PI) * distSE + Sun::pos.x,
+										0,
+										sin(pub_seta / 180 * PI) * distSE + Sun::pos.z);
 	//太阳位置为圆心,匀速圆周运动
 	//更改pos
 }
 //自转
 void Earth::Rotate() {
 	//更改rot
+	self_seta += 0.1;
 	CMatrix m;
-	m.SetRotate(10, CVector(1, 2, 0));
-	this->transform->rotation = (m * this->transform->rotation.ToCMatrix()).ToCQuaternion();
+	m.SetRotate(self_seta, CVector(0, 1, 0));
+	this->transform->rotation = m.ToCQuaternion();
 
 }
 

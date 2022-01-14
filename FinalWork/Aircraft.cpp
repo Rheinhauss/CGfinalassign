@@ -85,11 +85,11 @@ Aircraft::Aircraft()
 	//设置物体标签
 	this->tag = "Aircraft";
 	//设置移动速度 px/s
-	this->moveSpeed = 10;
+	this->moveSpeed = 0.03;
 	//设置旋转速度 度/s
 	this->rotSpeed = 3;
 	//设置射击间隔 s
-	this->shootInterval = 0.1;
+	this->shootInterval = 0.4;
 	//初始化计时器
 	this->timer = new Timer();
 	this->timer->start();
@@ -97,6 +97,7 @@ Aircraft::Aircraft()
 	this->pattern = true;
 	//初始化目标敌机,置为空
 	this->target = nullptr;
+	this->transform->position = CVector(20, 0, 20);
 
 	/*
 	根据绘制的模型,设置碰撞盒范围

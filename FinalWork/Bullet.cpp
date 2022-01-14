@@ -2,6 +2,7 @@
 #include "PlayerMgr.h"
 #include"TimeMgr.h"
 #include "CVector.h"
+#include"DestroyMgr.h"
 
 //设置射程
 double Bullet::shootRange = 100;
@@ -50,6 +51,7 @@ Bullet::~Bullet()
 			++it;
 		}
 	}
+	delete this->path;
 }
 
 
@@ -71,7 +73,8 @@ void Bullet::Move() {
 	this->path->update_path(this->transform->position);
 	//判断是否超过射程,是则删除
 	if (Object::distance(*this, this->point) > shootRange)
-		delete this;
+		//delete this->path;
+		DestroyMgr::add(this);
 }
 
 //override

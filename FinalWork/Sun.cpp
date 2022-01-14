@@ -1,10 +1,13 @@
 #include "Sun.h"
+#include "glut.h"
 
 Sun::Sun()
 {
 	this->name = "sun";
 	this->tag = "sun";
-	this->radius = 10;
+	this->radius = 8;
+	this->transform->position = CVector(0, 0, 0);
+	pos = CVector(0, 0, 0);
 }
 
 Sun::~Sun()
@@ -18,9 +21,15 @@ void Sun::Render() {
 }
 //绘制太阳球体+贴上纹理贴图
 void Sun::DrawSun() {
+	glPushMatrix();
+	glutSolidSphere(this->radius, 100, 100);
+	glPopMatrix();
+	//todo
 	return;
 }
 //在太阳位置处设置光源
 void Sun::SetLight() {
+	//todo
 	return;
 }
+CVector Sun::pos = CVector(0, 0, 0);

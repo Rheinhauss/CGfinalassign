@@ -9,8 +9,8 @@ Enemy::Enemy()
 	this->moveSpeed = 8;
 	this->interval = 3;
 	this->timer = new Timer();
-	//始终在z=0平面内
-	this->direction = CVector((float)SceneMgr::random(), (float)SceneMgr::random(), 0);
+	//始终在y=0平面内
+	this->direction = CVector((float)SceneMgr::random(), 0, (float)SceneMgr::random());
 	//加入敌机列表
 	EnemyMgr::Enemys.push_back(this);
 	++EnemyMgr::curEnemyNum;

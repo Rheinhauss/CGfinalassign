@@ -17,6 +17,7 @@ public:
 	static void DestroyMete(Meteorite* m);
 	//初始化边界和陨石
 	static void Init();
+	static void add();
 
 private:
 

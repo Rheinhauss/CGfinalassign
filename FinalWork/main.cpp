@@ -141,7 +141,7 @@ void myDisplay() {
 	glutSwapBuffers();
 }
 void myTimerFunc(int val) {
-	cout << "Object: " << Object::objs.size() << ". Colliders: " << CollMgr::Colliders.size() << endl;
+	//cout << "Object: " << Object::objs.size() << ". Colliders: " << CollMgr::Colliders.size() << endl;
 
 	//»æÖÆ
 	time_t begin_t = clock();
@@ -294,7 +294,7 @@ void myKeyboardUpFunc(unsigned char key, int x, int y) {
 		InputManager::KEY_U = false;
 		break;
 	}
-	case 'w=i': {
+	case 'i': {
 		InputManager::KEY_I = false;
 		break;
 	}
@@ -464,7 +464,7 @@ void myKeyboardFunc(unsigned char key, int x, int y) {
 		InputManager::KEY_U = true;
 		break;
 	}
-	case 'w=i': {
+	case 'i': {
 		InputManager::KEY_I = true;
 		break;
 	}

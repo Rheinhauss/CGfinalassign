@@ -1,5 +1,6 @@
 #pragma once
 #include "Collider.h"
+#include "Sun.h"
 
 class Earth : public Collider
 {
@@ -11,7 +12,7 @@ public:
 	void Update();
 	//半径
 	double radius;
-	double distSE = 20;
+	double distSE = 50;
 
 private:
 	//绘制地球球体+贴上纹理贴图
@@ -20,5 +21,7 @@ private:
 	void Move();
 	//自转
 	void Rotate();
+	float pub_seta = 0;
+	float self_seta = 0;
 };
 

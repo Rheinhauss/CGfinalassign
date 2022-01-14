@@ -7,7 +7,7 @@
 class Meteorite :public Collider
 {
 public:
-	Meteorite();
+	Meteorite(MeteRange*);
 	~Meteorite();
 
 	//此陨石对象所属的活动范围对象

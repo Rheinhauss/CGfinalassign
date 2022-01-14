@@ -1,14 +1,22 @@
 #include "Meteorite.h"
 #include "SceneMgr.h"
 #include "MeteMgr.h"
+#include "TimeMgr.h"
+#include "DestroyMgr.h"
 
-Meteorite::Meteorite()
+Meteorite::Meteorite(MeteRange*_mr):mr(_mr)
 {
 	this->name = "meteorite";
 	this->tag = "meteorite";
 	this->timer = new Timer();
-	//始终在z=0平面内
-	this->direction = CVector((float)SceneMgr::random(), (float)SceneMgr::random(), 0);
+	timer->start();
+	//始终在y=0平面内
+	this->direction = CVector((float)SceneMgr::random(), 0, (float)SceneMgr::random());
+	this->moveSpeed = 0.01;
+	MeteMgr::Metes.push_back(this);
+	float _r = mr->minRange + SceneMgr::random() * (mr->maxRange - mr->minRange),
+		_s = SceneMgr::random() * 180.0;
+	this->transform->position = CVector(_r * cos(_s / 180.0 * PI), 0, _r * sin(_s / 180.0 * PI));
 	/*
 	根据绘制的模型,设置碰撞盒范围
 	this->maxXYZ
@@ -35,18 +43,29 @@ Meteorite::~Meteorite()
 
 //绘制陨石
 void Meteorite::DrawMeteorite() {
-
+	glPushMatrix();
+	glutSolidSphere(1, 5, 5);
+	glPopMatrix();
 }
 
 //移动, 每隔interval更改一次随机移动方向, 如果到达边界, 则移动方向变为相反方向并从0开始计时
 void Meteorite::Move() {
-	//this->Transform->position更改位置 速度*forward*deltaTime
+	if (this->timer->time >= interval) {
+		this->direction = CVector((float)SceneMgr::random(), 0, (float)SceneMgr::random());
+	}
 
-	//判断计时器是否>=间隔
-	//是,则更改方向,旋转敌机朝向对应方向???(酌情附加)
+	//this->Transform->position更改位置 速度*forward*deltaTime
+	this->transform->position = this->transform->position + moveSpeed * direction * TimeMgr::deltaTime;
 
 	//判断是否到达边界 圆环带 MeteRange* mr
-	//如果到达边界, 则移动方向变为相反方向并从0开始计时
+	//如果到达边界, 则删除
+	double _x = this->transform->position.x - Sun::pos.x,
+		   _z = this->transform->position.z - Sun::pos.z,
+		   _r = sqrt(_x * _x + _z * _z);
+	if (mr->minRange >= _r || mr->maxRange <= _r) {
+		DestroyMgr::add(this);
+		MeteMgr::add();
+	}
 
 	//是否超出边界,是则消失,在边界处重新生成
 }

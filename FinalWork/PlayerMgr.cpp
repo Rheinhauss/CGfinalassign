@@ -21,7 +21,6 @@ int PlayerMgr::hitEnemyNum = 0;
 
 //É¾³ý×Óµ¯
 void PlayerMgr::DestroyBullet(Bullet* b) {
-	DestroyMgr::add(b->path);
 	DestroyMgr::add(b);
 }
  
