@@ -133,3 +133,6 @@ CEuler CVector::ToCEuler() {
 	}
 
 }
+CVector CVector::operator-() {
+	return CVector(-this->x, -this->y, -this->z);
+}

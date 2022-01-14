@@ -91,6 +91,25 @@ void SetView() {
 		}
 	}
 }
+void drawCoordinates(void)
+{
+	glLineWidth(3.0f);
+	glColor3f(1.0f, 0.0f, 0.0f); //画红色的x轴
+	glBegin(GL_LINES);
+	glVertex3f(0.0f, 0.0f, 0.0f);
+	glVertex3f(10.0f, 0.0f, 0.0f);
+	glEnd();
+	glColor3f(0.0, 1.0, 0.0); //画绿色的y轴
+	glBegin(GL_LINES);
+	glVertex3f(0.0f, 0.0f, 0.0f);
+	glVertex3f(0.0f, 10.0f, 0.0f);
+	glEnd();
+	glColor3f(0.0, 0.0, 1.0); //画蓝色的z轴
+	glBegin(GL_LINES);
+	glVertex3f(0.0f, 0.0f, 0.0f);
+	glVertex3f(0.0f, 0.0f, 10.0f);
+	glEnd();
+}
 void myDisplay() {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glPushMatrix();
@@ -101,9 +120,9 @@ void myDisplay() {
 	glPushMatrix();
 	//天空盒
 	glTranslatef(0, 0, -100);
-	SceneMgr::skybox->CreateSkyBox();
+	//SceneMgr::skybox->CreateSkyBox();
 	glPopMatrix();
-
+	drawCoordinates();
 	//绘制物体
 	int len = (int)Object::objs.size();
 	for (int i = 0; i < len; ++i) {
@@ -122,6 +141,8 @@ void myDisplay() {
 	glutSwapBuffers();
 }
 void myTimerFunc(int val) {
+	cout << "Object: " << Object::objs.size() << ". Colliders: " << CollMgr::Colliders.size() << endl;
+
 	//绘制
 	time_t begin_t = clock();
 	// to do 
@@ -560,6 +581,7 @@ void myKeyboardFunc(unsigned char key, int x, int y) {
 	}
 	case ' ': {
 		InputManager::KEY_SPACE = true;
+		cout << "KEY_SPACE" << endl;
 		break;
 	}
 

@@ -17,6 +17,7 @@ public:
 	//重载操作符
 	CVector operator+(const CVector& vec);//重载 + 操作符
 	CVector operator-(const CVector& vec);
+	CVector operator-();
 	CVector operator=(const CVector& vec);//重载 = 操作符
 	bool operator==(const CVector& vec);//重载 == 操作符
 	bool operator!=(const CVector& vec);//重载 != 操作符

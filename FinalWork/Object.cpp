@@ -43,3 +43,21 @@ void Object::Render() {
 void Object::Update() {
 	return;
 }
+CVector Object::_up() {
+	return this->transform->rotation.ToCMatrix().vecMul(CVector(0, -1, 0));
+}
+CVector Object::_left() {
+	return this->transform->rotation.ToCMatrix().vecMul(CVector(-1, 0, 0));
+}
+CVector Object::_forward() {
+	return this->transform->rotation.ToCMatrix().vecMul(CVector(0, 0, -1));
+}
+
+float Object::distance(Object& a, Object& b) {
+	auto tmp = a.transform->position - b.transform->position;
+	return sqrt(tmp.x * tmp.x + tmp.y * tmp.y + tmp.z * tmp.z);
+}
+float Object::distance(Object& a, CVector& b) {
+	auto tmp = a.transform->position - b;
+	return sqrt(tmp.x * tmp.x + tmp.y * tmp.y + tmp.z * tmp.z);
+}

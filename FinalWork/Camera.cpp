@@ -59,42 +59,42 @@ void Camera::Rotate() {
 		//获取摄像机的up单位向量
 		//绕 up 轴 顺时针旋转 rotSpeed * TimeMgr::deltaTime
 		CMatrix _m;
-		_m.SetRotate(rotSpeed * TimeMgr::deltaTime, _up());
+		_m.SetRotate(-rotSpeed * TimeMgr::deltaTime, _up());
 		this->transform->rotation = _m.ToCQuaternion() * this->transform->rotation;
 	}
 	if (InputManager::KEY_L) {
 		//获取摄像机的up单位向量
 		//绕 up 轴 逆时针旋转 rotSpeed * TimeMgr::deltaTime
 		CMatrix _m;
-		_m.SetRotate(-rotSpeed * TimeMgr::deltaTime, _up());
+		_m.SetRotate(rotSpeed * TimeMgr::deltaTime, _up());
 		this->transform->rotation = _m.ToCQuaternion() * this->transform->rotation;
 	}
 	if (InputManager::KEY_K) {
 		//获取摄像机的left单位向量
 		//绕 left 轴 顺时针旋转 rotSpeed * TimeMgr::deltaTime
 		CMatrix _m;
-		_m.SetRotate(rotSpeed * TimeMgr::deltaTime, _left());
+		_m.SetRotate(-rotSpeed * TimeMgr::deltaTime, _left());
 		this->transform->rotation = _m.ToCQuaternion() * this->transform->rotation;
 	}
 	if (InputManager::KEY_I) {
 		//获取摄像机的left单位向量
 		//绕 left 轴 逆时针旋转 rotSpeed * TimeMgr::deltaTime
 		CMatrix _m;
-		_m.SetRotate(-rotSpeed * TimeMgr::deltaTime, _left());
+		_m.SetRotate(rotSpeed * TimeMgr::deltaTime, _left());
 		this->transform->rotation = _m.ToCQuaternion() * this->transform->rotation;
 	}
 	if (InputManager::KEY_U) {
 		//获取摄像机的forward单位向量
 		//绕 forward 轴 逆时针旋转 rotSpeed * TimeMgr::deltaTime
 		CMatrix _m;
-		_m.SetRotate(rotSpeed * TimeMgr::deltaTime, _forward());
+		_m.SetRotate(-rotSpeed * TimeMgr::deltaTime, _forward());
 		this->transform->rotation = _m.ToCQuaternion() * this->transform->rotation;
 	}
 	if (InputManager::KEY_O) {
 		//获取摄像机的forward单位向量
 		//绕 forward 轴 顺时针旋转 rotSpeed * TimeMgr::deltaTime
 		CMatrix _m;
-		_m.SetRotate(-rotSpeed * TimeMgr::deltaTime, _forward());
+		_m.SetRotate(rotSpeed * TimeMgr::deltaTime, _forward());
 		this->transform->rotation = _m.ToCQuaternion() * this->transform->rotation;
 	}
 }
@@ -141,12 +141,3 @@ void Camera::Update() {
 	ChangePattern();
 }
 
-CVector Camera::_up() {
-	return this->transform->rotation.ToCMatrix().vecMul(CVector(0, 1, 0));
-}
-CVector Camera::_left() {
-	return this->transform->rotation.ToCMatrix().vecMul(CVector(1, 0, 0));
-}
-CVector Camera::_forward() {
-	return this->transform->rotation.ToCMatrix().vecMul(CVector(0, 0, 1));
-}

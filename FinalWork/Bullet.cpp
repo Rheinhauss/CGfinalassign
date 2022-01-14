@@ -53,6 +53,9 @@ Bullet::~Bullet()
 //绘制子弹
 void Bullet::DrawBullet() {
 	//绘制子弹 + 纹理
+	glPushMatrix();
+	glutSolidSphere(1, 10, 10);
+	glPopMatrix();
 }
 
 //每次移动之后需判断是否超过射程
@@ -64,7 +67,8 @@ void Bullet::Move() {
 								+ forward * moveSpeed * TimeMgr::deltaTime;
 	path.update_path(this->transform->position);
 	//判断是否超过射程,是则删除
-	//todo
+	if (Object::distance(*this, this->point) > shootRange)
+		delete this;
 }
 
 //override

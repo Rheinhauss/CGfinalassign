@@ -26,8 +26,14 @@ public:
 
 	//物体列表,所有继承此类的物体都需要加入
 	static vector<Object*> objs;
+	static float distance(Object& a, Object& b);
+	static float distance(Object& a, CVector& b);
 
 private:
+protected:
+	CVector _up();
+	CVector _left();
+	CVector _forward();
 
 };
 
