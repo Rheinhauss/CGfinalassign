@@ -4,7 +4,7 @@ Sun::Sun()
 {
 	this->name = "sun";
 	this->tag = "sun";
-	this->radius = 800;
+	this->radius = 10;
 }
 
 Sun::~Sun()

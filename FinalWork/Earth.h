@@ -11,6 +11,7 @@ public:
 	void Update();
 	//半径
 	double radius;
+	double distSE = 20;
 
 private:
 	//绘制地球球体+贴上纹理贴图
