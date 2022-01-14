@@ -4,7 +4,80 @@
 #include "Bullet.h"
 #include "PlayerMgr.h"
 #include "glut.h"
+void Cube() //正方体
+{
+	glBegin(GL_QUAD_STRIP);//填充凸多边形
+	glVertex3f(0.0f, 0.0f, 0.0f);
+	glVertex3f(0.0f, 1.0f, 0.0f);
+	glVertex3f(1.0f, 0.0f, 0.0f);
+	glVertex3f(1.0f, 1.0f, 0.0f);
+	glVertex3f(1.0f, 0.0f, -1.0f);
+	glVertex3f(1.0f, 1.0f, -1.0f);
+	glVertex3f(0.0f, 0.0f, -1.0f);
+	glVertex3f(0.0f, 1.0f, -1.0f);
+	glVertex3f(0.0f, 0.0f, 0.0f);
+	glVertex3f(0.0f, 1.0f, 0.0f);
+	glEnd();
+	glBegin(GL_QUAD_STRIP);
+	glVertex3f(0.0f, 0.0f, 0.0f);
+	glVertex3f(1.0f, 0.0f, 0.0f);
+	glVertex3f(0.0f, 0.0f, -1.0f);
+	glVertex3f(1.0f, 0.0f, -1.0f);
+	glVertex3f(0.0f, 1.0f, 0.0f);
+	glVertex3f(1.0f, 1.0f, 0.0f);
+	glVertex3f(0.0f, 1.0f, -1.0f);
+	glVertex3f(1.0f, 1.0f, -1.0f);
+	glEnd();
+}
+void Circle() //圆面
+{
+	glBegin(GL_TRIANGLE_FAN);//扇形连续填充三角形串
+	glVertex3f(0.0f, 0.0f, 0.0f);
+	int i = 0;
+	for (i = 0; i <= 375; i += 15)
+	{
+		float p = i * PI / 180;
+		glVertex3f(sin(p), cos(p), 0.0f);
+	}
+	glEnd();
+}
 
+void Cylinder() //圆柱
+{
+	glBegin(GL_QUAD_STRIP);//连续填充四边形串
+	int i = 0;
+	for (i = 0; i < 375; i += 15)
+	{
+		float p = i * PI / 180;
+		glTexCoord2f(p / (2 * PI), 1.0f);
+		glVertex3f(sin(p), cos(p), 1.0f);
+		glTexCoord2f(p / (2 * PI), 0.0f);
+		glVertex3f(sin(p), cos(p), 0.0f);
+	}
+	glEnd();
+	//GLUquadricObj *cyliner = gluNewQuadric(); //绘制圆柱的对象
+	//gluQuadricDrawStyle(cyliner, GLU_FILL);//绘图模式，填充
+	//gluQuadricNormals(cyliner, GLU_SMOOTH);//平滑
+	//gluQuadricTexture(cyliner, GL_TRUE);//启用纹理，可以绑定不同的纹理进行贴图
+	//gluCylinder(cyliner, 1, 1, 1, 36, 1);//绘制
+
+	Circle();
+	glTranslatef(0, 0, 1);
+	Circle();
+}
+void Cone() //圆锥
+{
+	glBegin(GL_QUAD_STRIP);//连续填充四边形串
+	int i = 0;
+	for (i = 0; i <= 390; i += 15)
+	{
+		float p = i * PI / 180;
+		glVertex3f(0, 0, 1.0f);
+		glVertex3f(sin(p), cos(p), 0.0f);
+	}
+	glEnd();
+	Circle();
+}
 Aircraft::Aircraft()
 {
 	//设置物体名称
@@ -41,12 +114,62 @@ Aircraft::~Aircraft()
 //绘制飞机
 void Aircraft::DrawAircraft() {
 	//绘制+纹理贴图
-	//todo
-	const double _size = 5;
+	static float i = 0;
+	i += 1;
+	if (fabsf(i - 360) < 0.4f)
+		i = 0;
 	glPushMatrix();
-	glTranslatef(-_size / 2, -_size / 2, -_size / 2);
-	glutSolidCube(_size);
+
+
+	glPushMatrix();
+	glColor3f(0.5, 1.5, 0.5);
+	glRotatef(i, 0, 1, 0);
+	glTranslatef(0, 0, 0.5);
+	glScalef(0.1f, 0.05f, 1);
+	Cube(); //螺旋桨
 	glPopMatrix();
+
+	glTranslatef(0, -0.1f, 0);
+	glScalef(0.1f, 0.1f, 0.1f);
+	Cube();
+	glScalef(10, 10, 10);
+
+	//Draw::LoadPlane_GLTextures();
+	//glEnable(GL_TEXTURE_2D);
+	//glBindTexture(GL_TEXTURE_2D, Plane_texture[0]);
+	//glEnable(GL_TEXTURE_GEN_S);
+	//glEnable(GL_TEXTURE_GEN_T);
+	//glFrontFace(GL_CW);
+	//机身
+	glColor3f(1, 0, 1);
+	glTranslatef(0.04f, -0.05f, -0.9f);
+	glScalef(0.1f, 0.1f, 1.5f);
+	Cylinder();
+	//glDisable(GL_TEXTURE_GEN_S);
+	//glDisable(GL_TEXTURE_GEN_T);
+	//glDisable(GL_TEXTURE_2D);
+	//glFrontFace(GL_CCW);
+
+	glColor3f(0, 1, 0);
+	glScalef(1, 1, 0.2f);
+	Cone();
+	glColor3f(0, 1, 1);
+
+	glTranslatef(0, 0.7f, -4.5f);
+	glScalef(0.2f, 2, 1);
+	Cube();
+
+	glTranslatef(-13, 0.3f, 0);
+	glScalef(27, 0.1f, 1);
+	Cube();
+
+	glPopMatrix();
+	//todo
+	//const double _size = 5;
+	//glPushMatrix();
+	//glTranslatef(-_size / 2, -_size / 2, -_size / 2);
+	//glutSolidCube(_size);
+	//glPopMatrix();
 	return;
 }
 

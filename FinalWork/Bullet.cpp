@@ -29,6 +29,8 @@ Bullet::Bullet()
 	this->maxXYZ
 	this->minXYZ
 	*/
+	this->maxXYZ = CVector(1, 1, 1);
+	this->minXYZ = CVector(0, 0, 0);
 	path.update_path(this->transform->position);
 }
 
