@@ -1,5 +1,5 @@
 #include "SceneMgr.h"
-#include <ctime>
+
 using namespace std;
 
 SceneMgr::SceneMgr()
@@ -16,14 +16,14 @@ Sun* SceneMgr::sun;
 Earth* SceneMgr::earth;
 //天空盒
 SkyBox* SceneMgr::skybox;
-
+std::uniform_int_distribution<int> SceneMgr::distribution_int 
+					= std::uniform_int_distribution<int>(0,9999);
+std::default_random_engine SceneMgr::generator;
 //返回随机数
 double SceneMgr::random() {
-	srand((int)time(0)); 
-	return rand() % (10000) / (double)10000;
+	return distribution_int(generator) / (double)9999;
 }
 //%10000
 int SceneMgr::randint() {
-	srand((int)(time(0)*1000));
-	return rand() % (10000);
+	return distribution_int(generator);
 }

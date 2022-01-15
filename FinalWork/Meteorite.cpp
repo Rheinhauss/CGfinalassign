@@ -52,6 +52,7 @@ void Meteorite::DrawMeteorite() {
 void Meteorite::Move() {
 	if (this->timer->time >= interval) {
 		this->direction = CVector((float)SceneMgr::random(), 0, (float)SceneMgr::random());
+		timer->start();
 	}
 
 	//this->Transform->position更改位置 速度*forward*deltaTime
