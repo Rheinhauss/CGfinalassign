@@ -104,6 +104,8 @@ Aircraft::Aircraft()
 	this->maxXYZ
 	this->minXYZ
 	*/
+	this->maxXYZ = CVector(+0.5, +0.5, +0.5);
+	this->minXYZ = CVector(-0.5, -0.5, -0.5);
 
 }
 
@@ -115,12 +117,22 @@ Aircraft::~Aircraft()
 //绘制飞机
 void Aircraft::DrawAircraft() {
 	//绘制+纹理贴图
+	//glBegin(GL_LINES);
+	//glVertex3f(0, 0, 0);
+	//glVertex3f(100, 0, 0);
+	//glVertex3f(0, 0, 0);
+	//glVertex3f(0, 100, 0);
+	//glVertex3f(0, 0, 0);
+	//glVertex3f(0, 0, 100);
+	//glEnd();
+
+	glutWireCube(1.0);
 	static float i = 0;
 	i += 1;
 	if (fabsf(i - 360) < 0.4f)
 		i = 0;
 	glPushMatrix();
-
+	//glScalef(1.2, 1.2, 1.2);
 
 	glPushMatrix();
 	glColor3f(0.5, 1.5, 0.5);

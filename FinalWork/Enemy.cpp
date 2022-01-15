@@ -30,7 +30,9 @@ Enemy::Enemy()
 	根据绘制的模型,设置碰撞盒范围
 	this->maxXYZ
 	this->minXYZ
-	*/
+	*/	
+	this->maxXYZ = CVector(1, 0.5, 0.5);
+	this->minXYZ = CVector(0, -0.5, -0.5);
 }
 
 Enemy::~Enemy()

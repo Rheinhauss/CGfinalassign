@@ -30,8 +30,9 @@ Bullet::Bullet()
 	this->maxXYZ
 	this->minXYZ
 	*/
-	this->maxXYZ = CVector(0.5, 0.5, 0.5);
-	this->minXYZ = CVector(0, 0, 0);
+	const float t = 0.25;
+	this->maxXYZ = CVector(t, t, t);
+	this->minXYZ = CVector(-t, -t, -t);
 	path = new Path;
 	path->update_path(this->transform->position);
 }
@@ -86,8 +87,14 @@ void Bullet::Update() {
 	Move();
 }
 void Bullet::Collision(Collider *col) {
+	cout << "1";
 	if (col->tag == "enemy") {
 		++PlayerMgr::hitEnemyNum;
+		cout << "!" << endl;
+	}
+	if (col->tag == "meteorite") {
+
+		cout << "?" << endl;
 	}
 	if (col->tag != "Aircraft") {
 		PlayerMgr::DestroyBullet(this);
