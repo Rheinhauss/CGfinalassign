@@ -31,10 +31,11 @@ void Earth::Move() {
 //自转
 void Earth::Rotate() {
 	//更改rot
-	self_seta += 0.1;
-	CMatrix m;
-	m.SetRotate(self_seta, CVector(0, 1, 0));
-	this->transform->rotation = m.ToCQuaternion();
+	self_seta += 0.1f;
+	if (self_seta >= 360) {
+		self_seta -= 360;
+	}
+	this->transform->rotation.SetAngle(self_seta, CVector(0, 1, 0));
 
 }
 

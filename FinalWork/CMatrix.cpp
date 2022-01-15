@@ -2,6 +2,8 @@
 
 CMatrix::CMatrix()
 {
+	for (int i = 0; i < 16; ++i)
+		(*this)[i] = 0;
 }
 
 CMatrix::~CMatrix()

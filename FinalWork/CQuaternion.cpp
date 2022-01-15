@@ -2,6 +2,10 @@
 
 CQuaternion::CQuaternion()
 {
+	this->x = 0;
+	this->y = 0;
+	this->z = 0;
+	this->w = 1;
 }
 CQuaternion::CQuaternion(const float X, const float Y, const float Z, const float W) {
 	this->Set(X, Y, Z, W);

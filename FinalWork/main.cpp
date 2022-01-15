@@ -16,6 +16,7 @@ void SetRC();
 void Update();
 void SetView();
 void Init();//游戏的所有初始化操作
+void SetLight();
 
 
 int main(int argc, char *argv[])
@@ -43,11 +44,11 @@ int main(int argc, char *argv[])
 void Init() {
 	//生成摄像机
 	camera = new Camera();
-	//生成天空盒
-	SceneMgr::skybox = new SkyBox((char *) "../run/skybox\\siege_ft.bmp", (char *) "../run/skybox\\siege_bk.bmp",
-		(char *) "../run/skybox\\siege_up.bmp", (char *) "../run/skybox\\siege_dn.bmp",
-		(char *) "../run/skybox\\siege_rt.bmp", (char *) "../run/skybox\\siege_lf.bmp");
-	SceneMgr::skybox->setSkyBox(-10, 10);
+	////生成天空盒
+	//SceneMgr::skybox = new SkyBox((char *) "../run/skybox\\siege_ft.bmp", (char *) "../run/skybox\\siege_bk.bmp",
+	//	(char *) "../run/skybox\\siege_up.bmp", (char *) "../run/skybox\\siege_dn.bmp",
+	//	(char *) "../run/skybox\\siege_rt.bmp", (char *) "../run/skybox\\siege_lf.bmp");
+	//SceneMgr::skybox->setSkyBox(-10, 10);
 	//生成太阳
 	SceneMgr::sun = new Sun();
 	//生成地球
@@ -117,12 +118,26 @@ void myDisplay() {
 	//设置摄像机
 	SetView();
 
-	glPushMatrix();
-	//天空盒
-	glTranslatef(0, 0, -100);
-	//SceneMgr::skybox->CreateSkyBox();
-	glPopMatrix();
+	//glPushMatrix();
+	////天空盒
+	//glTranslatef(0, 0, -100);
+	////SceneMgr::skybox->CreateSkyBox();
+	//glPopMatrix();
 	drawCoordinates();
+
+
+	//设置光源属性
+	SetLight();
+	//设置材质属性
+	GLfloat amb[4] = { 0.4f,0.4f,0.4f,1 };
+	GLfloat dif[4] = { 1,1,1,1 };
+	GLfloat spe[4] = { 0.1f,0.1f,0.1f,1 };
+	glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, amb);
+	glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, dif);
+	glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, spe);
+	glLightModeli(GL_LIGHT_MODEL_TWO_SIDE, GL_TRUE);
+
+
 	//绘制物体
 	int len = (int)Object::objs.size();
 	for (int i = 0; i < len; ++i) {
@@ -601,4 +616,29 @@ void SetRC() {
 	//	glDisable(GL_DEPTH_TEST);
 	//glTexGeni(GL_S, GL_TEXTURE_GEN_MODE, GL_SPHERE_MAP);
 	//glTexGeni(GL_T, GL_TEXTURE_GEN_MODE, GL_SPHERE_MAP);
+}
+
+
+//光源
+void SetLight() {
+	GLfloat amb[4] = { 1,1,1,1 };
+	GLfloat dif[4] = { 1,1,1,1 };
+	GLfloat spe[4] = { 0.2f,0.2f,0.2f,1 };
+	GLfloat pos[4] = { 0,0,0,1 };
+	GLfloat static seta = 0;
+	seta += 1;
+	glPushMatrix();
+	glTranslatef(100, 0, -200.0f);
+	glRotatef(seta, 1, 1, 1);
+	glTranslatef(pos[0], pos[1], pos[2]);
+	glColor3f(1, 0, 0);
+	glutSolidSphere(0.1f, 10, 10);
+
+	glLightfv(GL_LIGHT0, GL_AMBIENT, amb);
+	glLightfv(GL_LIGHT0, GL_DIFFUSE, dif);
+	glLightfv(GL_LIGHT0, GL_SPECULAR, spe);
+	glLightfv(GL_LIGHT0, GL_POSITION, pos);
+	glPopMatrix();
+	glEnable(GL_LIGHTING);
+	glEnable(GL_LIGHT0);
 }
