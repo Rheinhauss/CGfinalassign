@@ -22,7 +22,7 @@ public:
 
 
 	//·µ»ØËæ»úÊı
-	static double random();
+	static double random(bool);
 	static int randint();
 
 private:

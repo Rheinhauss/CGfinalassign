@@ -11,11 +11,11 @@ Meteorite::Meteorite(MeteRange*_mr):mr(_mr)
 	this->timer = new Timer();
 	timer->start();
 	//始终在y=0平面内
-	this->direction = CVector((float)SceneMgr::random(), 0, (float)SceneMgr::random());
+	this->direction = CVector((float)SceneMgr::random(true), 0, (float)SceneMgr::random(true));
 	this->moveSpeed = 0.01;
 	MeteMgr::Metes.push_back(this);
-	float _r = mr->minRange + SceneMgr::random() * (mr->maxRange - mr->minRange),
-		_s = SceneMgr::random() * 180.0;
+	float _r = mr->minRange + SceneMgr::random(false) * (mr->maxRange - mr->minRange),
+		_s = SceneMgr::random(false) * 180.0;
 	this->transform->position = CVector(_r * cos(_s / 180.0 * PI), 0, _r * sin(_s / 180.0 * PI));
 	/*
 	根据绘制的模型,设置碰撞盒范围
@@ -51,7 +51,7 @@ void Meteorite::DrawMeteorite() {
 //移动, 每隔interval更改一次随机移动方向, 如果到达边界, 则移动方向变为相反方向并从0开始计时
 void Meteorite::Move() {
 	if (this->timer->time >= interval) {
-		this->direction = CVector((float)SceneMgr::random(), 0, (float)SceneMgr::random());
+		this->direction = CVector((float)SceneMgr::random(true), 0, (float)SceneMgr::random(true));
 		timer->start();
 	}
 

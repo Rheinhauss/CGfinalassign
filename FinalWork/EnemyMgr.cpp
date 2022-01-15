@@ -34,7 +34,7 @@ void EnemyMgr::CreateEnemy() {
 		return;
 	}
 	int n = (int)EnemyMgr::EnemySpawns.size();
-	int index = (int)(SceneMgr::random() * n);
+	int index = (int)(SceneMgr::random(false) * n);
 	Enemy* e = new Enemy();
 	e->transform->position = EnemyMgr::EnemySpawns[index]->transform->position;
 	e->transform->rotation = EnemyMgr::EnemySpawns[index]->transform->rotation;

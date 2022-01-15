@@ -11,7 +11,7 @@ Enemy::Enemy()
 	this->timer = new Timer();
 	timer->start();
 	//始终在y=0平面内
-	this->direction = CVector((float)SceneMgr::random(), 0, (float)SceneMgr::random());
+	this->direction = CVector((float)SceneMgr::random(true), 0, (float)SceneMgr::random(true));
 	//加入敌机列表
 	EnemyMgr::Enemys.push_back(this);
 	++EnemyMgr::curEnemyNum;
