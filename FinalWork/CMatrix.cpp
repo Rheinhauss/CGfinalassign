@@ -89,15 +89,18 @@ CVector CMatrix::vecMul(CVector& p) {//补0
 
 //矩阵与点相乘
 CVector CMatrix::posMul(CVector& p) {//补1
-	float tmp[4] = { p[0],p[1],p[2],1 };
-	float temp[4];
+	register float tmp0 = p[0], tmp1 = p[1], tmp2 = p[2], tmp3 = 1;
+	float temp[4]{ 0 };
+	register float t = 0;
 	for (int j = 0; j < 4; ++j) {
-		temp[j] = 0;
-		for (int num = 0; num < 4; ++num)
-			temp[j] += (*this)[num * 4 + j] * tmp[num];
+		t = 0;
+		t += (*this)[0 * 4 + j] * tmp0;
+		t += (*this)[1 * 4 + j] * tmp1;
+		t += (*this)[2 * 4 + j] * tmp2;
+		t += (*this)[3 * 4 + j] * tmp3;
+		temp[j] = t;
 	}
-	CVector t(temp[0], temp[1], temp[2]);
-	return t;
+	return CVector(temp[0], temp[1], temp[2]);
 }
 
 //设置为旋转矩阵

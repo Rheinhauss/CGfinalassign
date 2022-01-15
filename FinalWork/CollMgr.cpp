@@ -58,7 +58,7 @@ void CollMgr::CollisionDetec() {
 					PA[i] = m.posMul(PA[i]);
 					PA[i] = PA[i] + (*it)->transform->position;
 					if ((PA[i] - SceneMgr::earth->transform->position).len() <= SceneMgr::earth->radius) {
-						cout << "it2 = earth" << endl; 
+						//cout << "it2 = earth" << endl; 
 						(*it)->Collision(*it2);
 					}
 				}
@@ -80,7 +80,7 @@ void CollMgr::CollisionDetec() {
 					PA[i] = m.posMul(PA[i]);
 					PA[i] = PA[i] + (*it2)->transform->position;
 					if ((PA[i] - SceneMgr::earth->transform->position).len() <= SceneMgr::earth->radius) {
-						cout << "it1 = earth" << endl; 
+						//cout << "it1 = earth" << endl; 
 						(*it2)->Collision(*it);
 					}
 				}

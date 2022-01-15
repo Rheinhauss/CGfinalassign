@@ -597,7 +597,7 @@ void myKeyboardFunc(unsigned char key, int x, int y) {
 	}
 	case ' ': {
 		InputManager::KEY_SPACE = true;
-		cout << "KEY_SPACE" << endl;
+		//cout << "KEY_SPACE" << endl;
 		break;
 	}
 

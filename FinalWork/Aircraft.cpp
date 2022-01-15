@@ -85,11 +85,11 @@ Aircraft::Aircraft()
 	//设置物体标签
 	this->tag = "Aircraft";
 	//设置移动速度 px/s
-	this->moveSpeed = 0.03;
+	this->moveSpeed = 0.3;
 	//设置旋转速度 度/s
-	this->rotSpeed = 3;
+	this->rotSpeed = 1;
 	//设置射击间隔 s
-	this->shootInterval = 0.4;
+	this->shootInterval = 0.6;
 	//初始化计时器
 	this->timer = new Timer();
 	this->timer->start();

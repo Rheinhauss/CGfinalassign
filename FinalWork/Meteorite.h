@@ -24,7 +24,7 @@ private:
 	double moveSpeed;
 
 	//更改移动方向的时间间隔
-	double interval;
+	double interval = 200;
 
 	//计时器
 	Timer* timer;
