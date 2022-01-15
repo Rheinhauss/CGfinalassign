@@ -99,6 +99,12 @@
     <ClCompile Include="DestroyMgr.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="Sphere.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureMgr.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SkyBox.h">
@@ -183,6 +189,12 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="DestroyMgr.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Sphere.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureMgr.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

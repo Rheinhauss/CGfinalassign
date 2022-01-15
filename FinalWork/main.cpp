@@ -42,6 +42,7 @@ int main(int argc, char *argv[])
 }
 
 void Init() {
+
 	//生成摄像机
 	camera = new Camera();
 	////生成天空盒

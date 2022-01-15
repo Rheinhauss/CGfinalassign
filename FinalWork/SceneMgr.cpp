@@ -1,4 +1,5 @@
 #include "SceneMgr.h"
+#include "TextureMgr.h"
 
 using namespace std;
 
@@ -29,4 +30,8 @@ double SceneMgr::random(bool sign = false) {
 //%10000
 int SceneMgr::randint() {
 	return distribution_int(generator);
+}
+
+void SceneMgr::InitTexture() {
+	TextureMgr::init();
 }

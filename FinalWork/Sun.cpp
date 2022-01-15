@@ -1,5 +1,8 @@
-#include "Sun.h"
+#include "glew.h"
 #include "glut.h"
+#include "Sun.h"
+#include "Sphere.h"
+#include "TextureMgr.h"
 
 Sun::Sun()
 {
@@ -22,7 +25,8 @@ void Sun::Render() {
 //»æÖÆÌ«ÑôÇòÌå+ÌùÉÏÎÆÀíÌùÍ¼
 void Sun::DrawSun() {
 	glPushMatrix();
-	glutSolidSphere(this->radius, 100, 100);
+	//glutSolidSphere(this->radius, 100, 100);
+	Sphere::Draw(this->radius, 100, 100, GL_TEXTURE0);
 	glPopMatrix();
 	//todo
 	return;
