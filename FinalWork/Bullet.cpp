@@ -16,7 +16,7 @@ Bullet::Bullet()
 	//设置标签
 	this->tag = "bullet";
 	//设置速度
-	this->moveSpeed = 2;
+	this->moveSpeed = 0.5;
 	//设置发射点,用于判断是否超过射程
 	this->point = PlayerMgr::Player->transform->position;
 	//初始化子弹的Transform
@@ -30,7 +30,8 @@ Bullet::Bullet()
 	this->maxXYZ
 	this->minXYZ
 	*/
-	const float t = 0.25;
+	//const float t = 0.25;
+	const float t = 0.5;
 	this->maxXYZ = CVector(t, t, t);
 	this->minXYZ = CVector(-t, -t, -t);
 	path = new Path;
@@ -93,7 +94,6 @@ void Bullet::Collision(Collider *col) {
 		cout << "!" << endl;
 	}
 	if (col->tag == "meteorite") {
-
 		cout << "?" << endl;
 	}
 	if (col->tag != "Aircraft") {

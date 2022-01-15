@@ -41,14 +41,22 @@ bool Collider::Collide(Collider *A, Collider *B) {
 		CVector(A->maxXYZ.x, A->maxXYZ.y, A->minXYZ.z),
 		CVector(A->maxXYZ.x, A->maxXYZ.y, A->maxXYZ.z),
 	};
+
+	CVector Bmax = B->maxXYZ;
+	CVector Bmin = B->minXYZ;
+	CMatrix mB = B->transform->rotation.ToCMatrix();
+	Bmax = mB.posMul(Bmax);
+	Bmin = mB.posMul(Bmin);
+	Bmax = Bmax + B->transform->position;
+	Bmin = Bmin + B->transform->position;
 	
-	CMatrix m = A->transform->rotation.ToCMatrix();
+	CMatrix mA = A->transform->rotation.ToCMatrix();
 	for (int i = 0; i < 8; ++i) {
-		PA[i] = m.posMul(PA[i]);
+		PA[i] = mA.posMul(PA[i]);
 		PA[i] = PA[i] + A->transform->position;
-		if (PA[i].x <= B->maxXYZ.x && PA[i].x >= B->maxXYZ.x) {
-			if (PA[i].x <= B->maxXYZ.x && PA[i].x >= B->maxXYZ.x) {
-				if (PA[i].x <= B->maxXYZ.x && PA[i].x >= B->maxXYZ.x) {
+		if (PA[i].x <= Bmax.x && PA[i].x >= Bmin.x) {
+			if (PA[i].y <= Bmax.y && PA[i].y >= Bmin.y) {
+				if (PA[i].z <= Bmax.z && PA[i].z >= Bmin.z) {
 					return true;
 				}
 			}

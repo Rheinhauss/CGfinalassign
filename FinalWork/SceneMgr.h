@@ -16,6 +16,8 @@ public:
 	static Earth *earth;
 	//Ìì¿ÕºÐ
 	static SkyBox *skybox;
+
+	static 
 	static std::default_random_engine generator;
 	static std::uniform_int_distribution<int> distribution_int;
 	static std::uniform_int_distribution<float> distribution_fp;

@@ -38,7 +38,7 @@ int main(int argc, char *argv[])
 	glutKeyboardFunc(&myKeyboardFunc);//响应键盘控制
 	SetRC();//清屏
 	glutMainLoop();//循环
-	return 0;
+       	return 0;
 }
 
 void Init() {
