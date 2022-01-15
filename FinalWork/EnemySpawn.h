@@ -4,8 +4,9 @@
 class EnemySpawn : public Object
 {
 public:
-	EnemySpawn();
+	EnemySpawn(CVector&);
 	~EnemySpawn();
+
 
 private:
 

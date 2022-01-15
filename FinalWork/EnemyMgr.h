@@ -29,6 +29,7 @@ public:
 	static void Init();
 
 private:
+	static void add();
 
 };
 

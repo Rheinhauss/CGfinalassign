@@ -15,13 +15,15 @@ public:
 	void Collision(Collider *col);
 
 private:
-	double moveSpeed;
+	double moveSpeed, rotSpeed;
+	double seta;
+	bool isrotating = false;
 
 	//更改移动方向的时间间隔
-	double interval;
+	double rinterval,rpinterval;
 
 	//计时器
-	Timer* timer;
+	Timer* rtimer,*rptimer;
 
 	//移动方向
 	CVector direction;
