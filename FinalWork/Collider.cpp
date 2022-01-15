@@ -49,6 +49,15 @@ bool Collider::Collide(Collider *A, Collider *B) {
 	Bmin = mB.posMul(Bmin);
 	Bmax = Bmax + B->transform->position;
 	Bmin = Bmin + B->transform->position;
+	CVector BBmax, BBmin;
+	BBmax.x = max(Bmax.x, Bmin.x);
+	BBmax.y = max(Bmax.y, Bmin.y);
+	BBmax.z = max(Bmax.z, Bmin.z);
+	BBmin.x = min(Bmax.x, Bmin.x);
+	BBmin.y = min(Bmax.y, Bmin.y);
+	BBmin.z = min(Bmax.z, Bmin.z);
+	Bmax = BBmax;
+	Bmin = BBmin;
 	
 	CMatrix mA = A->transform->rotation.ToCMatrix();
 	for (int i = 0; i < 8; ++i) {

@@ -191,7 +191,7 @@ void Aircraft::Move() {
 	if (InputManager::KEY_UP) {
 		//获取当前飞机的前方单位向量 forward
 		//飞机的Transform.position += forward * moveSpeed * TimeMgr::deltaTime
-		this->transform->position = this->transform->position + _forward() * moveSpeed * TimeMgr::deltaTime;
+		this->transform->position = this->transform->position - _forward() * moveSpeed * TimeMgr::deltaTime;
 		//判断是否触及边界,即到(0,0,0)距离是否>=2500,是则pos = -pos
 		if (Object::distance(*this, CVector(0, 0, 0)) >= 2500)
 			this->transform->position = -this->transform->position;
@@ -199,7 +199,7 @@ void Aircraft::Move() {
 	if (InputManager::KEY_DOWN) {
 		//获取当前飞机的前方单位向量 forward
 		//飞机的Transform.position += -1 * forward * moveSpeed * TimeMgr::deltaTime
-		this->transform->position = this->transform->position - _forward() * moveSpeed * TimeMgr::deltaTime;
+		this->transform->position = this->transform->position + _forward() * moveSpeed * TimeMgr::deltaTime;
 		//判断是否触及边界,即到(0,0,0)距离是否>=2500,是则pos = -pos
 		if (Object::distance(*this, CVector(0, 0, 0)) >= 2500)
 			this->transform->position = -this->transform->position;
@@ -212,14 +212,14 @@ void Aircraft::Rotate() {
 		//获取飞机的上方单位向量 up
 		//更新飞机的Transform的四元数,	在当前旋转下绕飞机的up向量向 左 旋转 rotSpeed * TimeMgr::deltaTime
 		CMatrix m;
-		m.SetRotate(-rotSpeed * TimeMgr::deltaTime, _up());
+		m.SetRotate(rotSpeed * TimeMgr::deltaTime, _up());
 		this->transform->rotation = m.ToCQuaternion() * this->transform->rotation;
 	}
 	if (InputManager::KEY_RIGHT) {
 		//获取飞机的上方单位向量 up
 		//更新飞机的Transform的四元数,	在当前旋转下绕飞机的up向量向 右 旋转 rotSpeed * TimeMgr::deltaTime
 		CMatrix m;
-		m.SetRotate(rotSpeed * TimeMgr::deltaTime, _up());
+		m.SetRotate(-rotSpeed * TimeMgr::deltaTime, _up());
 		this->transform->rotation = m.ToCQuaternion() * this->transform->rotation;
 	}
 }

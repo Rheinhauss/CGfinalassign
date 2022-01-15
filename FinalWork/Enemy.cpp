@@ -62,7 +62,11 @@ void Enemy::Update() {
 	Move();
 }
 void Enemy::Collision(Collider *col) {
-	EnemyMgr::DestroyEnemy(this);
+	if ((col->tag == "enemy"))return;
+	else if ((col->tag == "Aircraft"))return;
+	else if ((col->tag == "meteorite"))return;
+	else 
+		EnemyMgr::DestroyEnemy(this);
 }
 
 //»æÖÆµĞ»ú
