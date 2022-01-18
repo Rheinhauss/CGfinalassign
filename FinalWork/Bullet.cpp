@@ -16,7 +16,7 @@ Bullet::Bullet()
 	//设置标签
 	this->tag = "bullet";
 	//设置速度
-	this->moveSpeed = 0.5;
+	this->moveSpeed = 50;
 	//设置发射点,用于判断是否超过射程
 	this->point = PlayerMgr::Player->transform->position;
 	//初始化子弹的Transform

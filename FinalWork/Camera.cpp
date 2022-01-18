@@ -10,8 +10,8 @@ Camera::Camera()
 {
 	this->name = "Camera";
 	this->tag = "Camera";
-	this->moveSpeed = 2;
-	this->rotSpeed = 0.2;
+	this->moveSpeed = 10;
+	this->rotSpeed = 10;
 }
 
 Camera::~Camera()
