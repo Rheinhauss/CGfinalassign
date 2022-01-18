@@ -203,7 +203,7 @@ void myTimerFunc(int val) {
 	// to do 
 	myDisplay();
 	time_t finish_t = clock();
-	 
+
 	double time = ((double)(finish_t - begin_t))/ CLOCKS_PER_SEC;
 	if (time < 1 / 40)
 		time = 1 / 40;
