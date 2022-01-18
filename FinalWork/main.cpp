@@ -17,6 +17,7 @@ void Update();
 void SetView();
 void Init();//游戏的所有初始化操作
 void SetLight();
+void myMouseFunc(int button, int state, int x, int y);
 
 
 int main(int argc, char *argv[])
@@ -36,9 +37,10 @@ int main(int argc, char *argv[])
 	glutSpecialUpFunc(&SpecialKeyUp);
 	glutKeyboardUpFunc(&myKeyboardUpFunc);//键盘按键检测
 	glutKeyboardFunc(&myKeyboardFunc);//响应键盘控制
+	glutMouseFunc(&myMouseFunc);
 	SetRC();//清屏
 	glutMainLoop();//循环
-       	return 0;
+    return 0;
 }
 
 void Init() {
@@ -93,6 +95,8 @@ void SetView() {
 			glTranslatef(-pos.x, -pos.y, -pos.z);
 		}
 	}
+	SceneMgr::updateViewMatrixInThis();
+	SceneMgr::updateProjMatrixInThis();
 }
 void drawCoordinates(void)
 {
@@ -144,7 +148,7 @@ void myDisplay() {
 	glBindTexture(GL_TEXTURE_2D, TextureMgr::textures[2]);
 	glEnable(GL_TEXTURE_GEN_S);
 	glEnable(GL_TEXTURE_GEN_T);
-	glutSolidCube(90);
+	//glutSolidCube(90);
 	glDisable(GL_TEXTURE_GEN_S);
 	glDisable(GL_TEXTURE_GEN_T);
 	glDisable(GL_TEXTURE_2D);
@@ -174,13 +178,13 @@ void myTimerFunc(int val) {
 	time_t finish_t = clock();
 
 	double time = (double)(finish_t - begin_t);
-	if (time < 1 / 60)
-		time = 1 / 60;
+	if (time < 1 / 40)
+		time = 1 / 40;
 	TimeMgr::deltaTime = time;
 	TimeMgr::currentTime += time;
 	//计算
 	Update();
-	glutTimerFunc(17, myTimerFunc, 0);
+	glutTimerFunc(25, myTimerFunc, 0);
 }
 void Update() {
 	//计时
@@ -197,6 +201,8 @@ void Update() {
 	DestroyMgr::DestroyObj();
 }
 void myReshape(int w, int h) {
+	SceneMgr::w = w;
+	SceneMgr::h = h;
 	GLfloat nRange = 100.0f;
 	glViewport(0, 0, w, h);
 	glMatrixMode(GL_PROJECTION);
@@ -650,4 +656,19 @@ void SetLight() {
 	glPopMatrix();
 	glEnable(GL_LIGHTING);
 	glEnable(GL_LIGHT0);
+}
+void myMouseFunc(int button, int state, int x, int y) {
+	if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN) {
+	cout << "x: " << x << "\ty: " << y << endl;
+	float ix = double(x) / double(SceneMgr::w);
+	float iy = double(y) / double(SceneMgr::h);
+		for (auto enemy : EnemyMgr::Enemys) {
+			if (enemy->ScreenMaxXY.x >= ix &&
+				enemy->ScreenMinXY.x <= ix &&
+				enemy->ScreenMaxXY.y >= iy &&
+				enemy->ScreenMinXY.y <= iy) {
+				cout << "enemy!" << endl;
+			}
+		}
+	}
 }

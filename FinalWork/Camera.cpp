@@ -11,7 +11,7 @@ Camera::Camera()
 	this->name = "Camera";
 	this->tag = "Camera";
 	this->moveSpeed = 2;
-	this->rotSpeed = 2;
+	this->rotSpeed = 0.2;
 }
 
 Camera::~Camera()

@@ -14,6 +14,7 @@ public:
 	void Update();
 	void Collision(Collider *col);
 
+	CVector ScreenMinXY, ScreenMaxXY;
 private:
 	double moveSpeed, rotSpeed;
 	double seta;
