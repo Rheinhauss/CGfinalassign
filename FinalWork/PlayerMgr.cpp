@@ -18,7 +18,7 @@ int PlayerMgr::colMeteNum = 0;
 int PlayerMgr::colEnemyNum = 0;
 //击中敌机次数
 int PlayerMgr::hitEnemyNum = 0;
-
+Timer* PlayerMgr::timeUsed;
 //删除子弹
 void PlayerMgr::DestroyBullet(Bullet* b) {
 	DestroyMgr::add(b);
