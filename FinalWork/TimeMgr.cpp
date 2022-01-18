@@ -12,7 +12,7 @@ TimeMgr::~TimeMgr()
 
 //当前帧运行时间(不能获取精确时间则使用固定的帧率, FPS设为25，则时间为0.04秒)*scaleTime
 //所有涉及随时间变化之类的都需要乘以 deltaTime, 以确定每秒变化一致
-double TimeMgr::deltaTime = 1/60;
+double TimeMgr::deltaTime = 1.0/40.0;
 //时间流速, 正常流速为1
 double TimeMgr::scaleTime = 1;
 //从开始游戏时计时, Game Over时结束计时, 使用timer计时

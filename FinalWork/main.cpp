@@ -1,5 +1,6 @@
 #include "engine.h"
 #include <time.h>
+#include <string>
 /*
 	FPS:60
 */
@@ -63,6 +64,8 @@ void Init() {
 	EnemyMgr::Init();
 	//生成玩家飞机
 	PlayerMgr::Player = new Aircraft();
+	PlayerMgr::timeUsed = new Timer();
+	PlayerMgr::timeUsed->start();
 }
 
 
@@ -166,6 +169,30 @@ void myDisplay() {
 		glPopMatrix();
 	}
 	glPopMatrix();
+
+	//begin 屏幕空间文字显示
+	string s = "enemy hit: " + to_string(PlayerMgr::hitEnemyNum)
+		+ "    meteor crash: " + to_string(PlayerMgr::colMeteNum)
+		+ "    time now: " + to_string(PlayerMgr::timeUsed->time);
+	glMatrixMode(GL_PROJECTION);
+	glPushMatrix();
+	glLoadIdentity();
+	glMatrixMode(GL_MODELVIEW);
+	glPushMatrix();
+	glLoadIdentity();
+
+	glRasterPos3f(-1,0.9,0);
+	glColor3f(1., 1., 1.);
+	for (int i = 0; i < s.size(); i++) {
+		glutBitmapCharacter(GLUT_BITMAP_8_BY_13, s[i]);
+	}
+	glMatrixMode(GL_PROJECTION);
+	glPopMatrix();
+	glMatrixMode(GL_MODELVIEW);
+	glPopMatrix();
+
+
+	//end
 	glutSwapBuffers();
 }
 void myTimerFunc(int val) {
@@ -177,7 +204,7 @@ void myTimerFunc(int val) {
 	myDisplay();
 	time_t finish_t = clock();
 
-	double time = (double)(finish_t - begin_t);
+	double time = ((double)(finish_t - begin_t))/ CLOCKS_PER_SEC;
 	if (time < 1 / 40)
 		time = 1 / 40;
 	TimeMgr::deltaTime = time;

@@ -19,9 +19,12 @@ public:
 	static int colEnemyNum;
 	//击中敌机次数
 	static int hitEnemyNum;
+	//游戏计时
+	static Timer* timeUsed;
 
 	//删除子弹
 	static void DestroyBullet(Bullet* b);
+
 
 private:
 
