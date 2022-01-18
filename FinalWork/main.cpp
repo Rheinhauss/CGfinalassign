@@ -5,7 +5,7 @@
 	FPS:60
 */
 Camera *camera;
-
+time_t begin_t, finish_t;
 void myDisplay();
 void myTimerFunc(int val);
 void myReshape(int w,int h);
@@ -40,6 +40,7 @@ int main(int argc, char *argv[])
 	glutKeyboardFunc(&myKeyboardFunc);//响应键盘控制
 	glutMouseFunc(&myMouseFunc);
 	SetRC();//清屏
+	begin_t = clock();
 	glutMainLoop();//循环
     return 0;
 }
@@ -196,19 +197,16 @@ void myDisplay() {
 	glutSwapBuffers();
 }
 void myTimerFunc(int val) {
-	//cout << "Object: " << Object::objs.size() << ". Colliders: " << CollMgr::Colliders.size() << endl;
-
 	//绘制
-	time_t begin_t = clock();
 	// to do 
 	myDisplay();
-	time_t finish_t = clock();
-
+	finish_t = clock();
 	double time = ((double)(finish_t - begin_t))/ CLOCKS_PER_SEC;
 	if (time < 1 / 40)
 		time = 1 / 40;
 	TimeMgr::deltaTime = time;
 	TimeMgr::currentTime += time;
+	begin_t = clock();
 	//计算
 	Update();
 	glutTimerFunc(25, myTimerFunc, 0);
