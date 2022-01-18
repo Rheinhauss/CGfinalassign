@@ -25,8 +25,8 @@ void Sun::Render() {
 //»æÖÆÌ«ÑôÇòÌå+ÌùÉÏÎÆÀíÌùÍ¼
 void Sun::DrawSun() {
 	glPushMatrix();
-	//glutSolidSphere(this->radius, 100, 100);
-	Sphere::Draw(this->radius, 100, 100, GL_TEXTURE0);
+	//glutSolidSphere(this->radius, 100, 100);'
+	Sphere::Draw(this->radius, 100, 100, TextureMgr::textures[0]);
 	glPopMatrix();
 	//todo
 	return;

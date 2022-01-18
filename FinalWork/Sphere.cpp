@@ -1,5 +1,3 @@
-#include "glew.h"
-#include "glut.h"
 #include "Sphere.h"
 #include <cmath>
 #include "CVector.h"
@@ -96,14 +94,14 @@ void Sphere::Draw(GLfloat radius, int lon, int lat, GLuint text)	//使用经度分割l
 			}
 		}
 	}
-	glEnable(GL_LIGHTING);
 	glEnable(GL_TEXTURE_2D);
-	//glBindTexture(GL_TEXTURE_2D, texture[0]);
-	glActiveTexture(text);
+	glBindTexture(GL_TEXTURE_2D, text);
 	//glEnable(GL_TEXTURE_GEN_S);
 	//glEnable(GL_TEXTURE_GEN_T);
 	glFrontFace(GL_CW);
 	glBegin(GL_TRIANGLES);
+	//glEnable(GL_TEXTURE_GEN_S);
+	//glEnable(GL_TEXTURE_GEN_T);
 	for (i = 0; i < lon; i++)	//经度
 	{
 		for (j = 0; j < lat; j++)	//维度
@@ -138,10 +136,9 @@ void Sphere::Draw(GLfloat radius, int lon, int lat, GLuint text)	//使用经度分割l
 		}
 	}
 	glEnd();
-	glFrontFace(GL_CCW);
 	//glDisable(GL_TEXTURE_GEN_S);
 	//glDisable(GL_TEXTURE_GEN_T);
 	glDisable(GL_TEXTURE_2D);
-	glDisable(GL_LIGHTING);
+	//glDisable(GL_LIGHTING);
 
 }

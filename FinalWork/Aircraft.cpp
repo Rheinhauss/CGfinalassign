@@ -4,6 +4,7 @@
 #include "Bullet.h"
 #include "PlayerMgr.h"
 #include "glut.h"
+#include "TextureMgr.h"
 void Cube() //正方体
 {
 	glBegin(GL_QUAD_STRIP);//填充凸多边形
@@ -149,7 +150,7 @@ void Aircraft::DrawAircraft() {
 
 	//Draw::LoadPlane_GLTextures();
 	//glEnable(GL_TEXTURE_2D);
-	//glBindTexture(GL_TEXTURE_2D, Plane_texture[0]);
+	//glBindTexture(GL_TEXTURE_2D, TextureMgr::textures[3]);
 	//glEnable(GL_TEXTURE_GEN_S);
 	//glEnable(GL_TEXTURE_GEN_T);
 	//glFrontFace(GL_CW);

@@ -42,7 +42,7 @@ int main(int argc, char *argv[])
 }
 
 void Init() {
-
+	SceneMgr::InitTexture();
 	//生成摄像机
 	camera = new Camera();
 	////生成天空盒
@@ -50,6 +50,7 @@ void Init() {
 	//	(char *) "../run/skybox\\siege_up.bmp", (char *) "../run/skybox\\siege_dn.bmp",
 	//	(char *) "../run/skybox\\siege_rt.bmp", (char *) "../run/skybox\\siege_lf.bmp");
 	//SceneMgr::skybox->setSkyBox(-10, 10);
+	
 	//生成太阳
 	SceneMgr::sun = new Sun();
 	//生成地球
@@ -139,7 +140,14 @@ void myDisplay() {
 	glLightModeli(GL_LIGHT_MODEL_TWO_SIDE, GL_TRUE);
 
 
-	//绘制物体
+	//绘制物体	
+	glBindTexture(GL_TEXTURE_2D, TextureMgr::textures[2]);
+	glEnable(GL_TEXTURE_GEN_S);
+	glEnable(GL_TEXTURE_GEN_T);
+	glutSolidCube(90);
+	glDisable(GL_TEXTURE_GEN_S);
+	glDisable(GL_TEXTURE_GEN_T);
+	glDisable(GL_TEXTURE_2D);
 	int len = (int)Object::objs.size();
 	for (int i = 0; i < len; ++i) {
 		//转为物体的变换

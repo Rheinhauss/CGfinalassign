@@ -31,3 +31,4 @@ using namespace std;
 #include "Timer.h"
 #include "InputManager.h"
 #include "DestroyMgr.h"
+#include "TextureMgr.h"
