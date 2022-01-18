@@ -96,7 +96,7 @@ void Bullet::Collision(Collider *col) {
 	if (col->tag == "meteorite") {
 		cout << "?" << endl;
 	}
-	if (col->tag != "Aircraft") {
+   	if (col->tag != "Aircraft") {
 		PlayerMgr::DestroyBullet(this);
 	}
 }

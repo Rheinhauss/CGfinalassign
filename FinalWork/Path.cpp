@@ -9,7 +9,7 @@ Path::~Path(){}
 void Path::Render() {
 	glBegin(GL_LINE_STRIP);
 	glColor3f(1, 0.5, 0.5);
-	glLineWidth(2.0);
+	glLineWidth(1.0);
 	for (int i = 0; i < this->pathnodes.size(); i++) {
 		glVertex3f(this->pathnodes[i].x, this->pathnodes[i].y, this->pathnodes[i].z);
 	}
