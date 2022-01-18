@@ -6,6 +6,7 @@
 #include "glew.h"
 #include "glut.h"
 GLuint TextureMgr::textures[10]{};
+GLUquadricObj* TextureMgr::e_tex = gluNewQuadric();
 void TextureMgr::init() {
 	char name[4][10]{
 		"Sun.bmp",
