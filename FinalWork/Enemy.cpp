@@ -60,10 +60,10 @@ void Enemy::Render() {
 void Enemy::Update() {
 	Move();
 	//proj*view*model
-	auto z = SceneMgr::ProjMatrix * SceneMgr::ViewMatrix 
-				* this->transform->rotation.ToCMatrix();
-	auto a = z.posMul(this->transform->position + this->minXYZ);
-	auto b = z.posMul(this->transform->position + this->maxXYZ);
+	auto z = SceneMgr::ProjMatrix * SceneMgr::ViewMatrix;
+	auto r = this->transform->rotation.ToCMatrix();
+	auto a = z.posMul(r.posMul(this->transform->position) + this->minXYZ);
+	auto b = z.posMul(r.posMul(this->transform->position) + this->maxXYZ);
 	ScreenMaxXY.x = max(a.x, b.x);
 	ScreenMinXY.x = min(a.x, b.x); 
 	ScreenMaxXY.y = max(a.y, b.y);
