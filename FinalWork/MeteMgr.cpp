@@ -36,5 +36,5 @@ void MeteMgr::add() {
 	double b = (SceneMgr::random(false) / 1.5) * ((SceneMgr::randint() % 2 == 0) ? 1.0 : -1.0) + 2.0;
 	p->transform->scale = p->transform->scale * b;
 	p->minXYZ = p->minXYZ * b;
-	p->maxXYZ = p->maxXYZ * b;
+	p->     maxXYZ = p->maxXYZ * b;
 }

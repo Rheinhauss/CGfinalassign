@@ -8,9 +8,8 @@ Enemy::Enemy()
 {
 	this->name = "enemy";
 	this->tag = "enemy";
-	this->moveSpeed = 8;
-	this->rinterval = 100;
-	this->rpinterval = 50;
+	this->rinterval = 1;
+	this->rpinterval = 0.5;
 	this->seta = SceneMgr::randint() % 360;
 	//this->seta = 0;
 	CMatrix m;
@@ -21,8 +20,8 @@ Enemy::Enemy()
 	this->rptimer = new Timer();
 	//始终在y=0平面内
 	this->direction = CVector(cos(seta/180*PI), 0, sin(seta / 180 * PI));
-	this->moveSpeed = 0.15;
-	this->rotSpeed = 1;
+	this->moveSpeed = 0.05;
+	this->rotSpeed = 2;
 	//加入敌机列表
 	EnemyMgr::Enemys.push_back(this);
 	++EnemyMgr::curEnemyNum;
@@ -31,8 +30,8 @@ Enemy::Enemy()
 	this->maxXYZ
 	this->minXYZ
 	*/	
-	this->maxXYZ = CVector(1, 0.5, 0.5);
-	this->minXYZ = CVector(0, -0.5, -0.5);
+	this->maxXYZ = CVector(6, 3, 3);
+	this->minXYZ = CVector(0, -3, -3);
 }
 
 Enemy::~Enemy()
@@ -60,6 +59,15 @@ void Enemy::Render() {
 }
 void Enemy::Update() {
 	Move();
+	//proj*view*model
+	auto z = SceneMgr::ProjMatrix * SceneMgr::ViewMatrix;
+	auto r = this->transform->rotation.ToCMatrix();
+	auto a = z.posMul(r.posMul(this->transform->position) + this->minXYZ);
+	auto b = z.posMul(r.posMul(this->transform->position) + this->maxXYZ);
+	ScreenMaxXY.x = max(a.x, b.x);
+	ScreenMinXY.x = min(a.x, b.x); 
+	ScreenMaxXY.y = max(a.y, b.y);
+	ScreenMinXY.y = min(a.y, b.y);
 }
 void Enemy::Collision(Collider *col) {
 	if ((col->tag == "enemy"))return;
@@ -74,7 +82,7 @@ void Enemy::DrawEnemy() {
 	glPushMatrix();
 	glColor3f(1, 0, 0);
 	glRotatef(90, 0, 1, 0);
-	glutSolidCone(1, 2, 10, 10);
+	glutSolidCone(3, 6, 10, 10);
 	glPopMatrix();
 
 }

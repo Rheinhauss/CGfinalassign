@@ -1,10 +1,11 @@
 #include "engine.h"
 #include <time.h>
+#include <string>
 /*
 	FPS:60
 */
 Camera *camera;
-
+time_t begin_t, finish_t;
 void myDisplay();
 void myTimerFunc(int val);
 void myReshape(int w,int h);
@@ -17,6 +18,7 @@ void Update();
 void SetView();
 void Init();//游戏的所有初始化操作
 void SetLight();
+void myMouseFunc(int button, int state, int x, int y);
 
 
 int main(int argc, char *argv[])
@@ -36,9 +38,11 @@ int main(int argc, char *argv[])
 	glutSpecialUpFunc(&SpecialKeyUp);
 	glutKeyboardUpFunc(&myKeyboardUpFunc);//键盘按键检测
 	glutKeyboardFunc(&myKeyboardFunc);//响应键盘控制
+	glutMouseFunc(&myMouseFunc);
 	SetRC();//清屏
+	begin_t = clock();
 	glutMainLoop();//循环
-       	return 0;
+    return 0;
 }
 
 void Init() {
@@ -61,6 +65,8 @@ void Init() {
 	EnemyMgr::Init();
 	//生成玩家飞机
 	PlayerMgr::Player = new Aircraft();
+	PlayerMgr::timeUsed = new Timer();
+	PlayerMgr::timeUsed->start();
 }
 
 
@@ -93,6 +99,8 @@ void SetView() {
 			glTranslatef(-pos.x, -pos.y, -pos.z);
 		}
 	}
+	SceneMgr::updateViewMatrixInThis();
+	SceneMgr::updateProjMatrixInThis();
 }
 void drawCoordinates(void)
 {
@@ -141,13 +149,13 @@ void myDisplay() {
 
 
 	//绘制物体	
-	//glBindTexture(GL_TEXTURE_2D, TextureMgr::textures[2]);
-	//glEnable(GL_TEXTURE_GEN_S);
-	//glEnable(GL_TEXTURE_GEN_T);
+	glBindTexture(GL_TEXTURE_2D, TextureMgr::textures[2]);
+	glEnable(GL_TEXTURE_GEN_S);
+	glEnable(GL_TEXTURE_GEN_T);
 	//glutSolidCube(90);
-	//glDisable(GL_TEXTURE_GEN_S);
-	//glDisable(GL_TEXTURE_GEN_T);
-	//glDisable(GL_TEXTURE_2D);
+	glDisable(GL_TEXTURE_GEN_S);
+	glDisable(GL_TEXTURE_GEN_T);
+	glDisable(GL_TEXTURE_2D);
 	int len = (int)Object::objs.size();
 	for (int i = 0; i < len; ++i) {
 		//转为物体的变换
@@ -162,25 +170,46 @@ void myDisplay() {
 		glPopMatrix();
 	}
 	glPopMatrix();
+
+	//begin 屏幕空间文字显示
+	string s = "enemy hit: " + to_string(PlayerMgr::hitEnemyNum)
+		+ "    meteor crash: " + to_string(PlayerMgr::colMeteNum)
+		+ "    time now: " + to_string(PlayerMgr::timeUsed->time);
+	glMatrixMode(GL_PROJECTION);
+	glPushMatrix();
+	glLoadIdentity();
+	glMatrixMode(GL_MODELVIEW);
+	glPushMatrix();
+	glLoadIdentity();
+
+	glRasterPos3f(-1,0.9,0);
+	glColor3f(1., 1., 1.);
+	for (int i = 0; i < s.size(); i++) {
+		glutBitmapCharacter(GLUT_BITMAP_8_BY_13, s[i]);
+	}
+	glMatrixMode(GL_PROJECTION);
+	glPopMatrix();
+	glMatrixMode(GL_MODELVIEW);
+	glPopMatrix();
+
+
+	//end
 	glutSwapBuffers();
 }
 void myTimerFunc(int val) {
-	//cout << "Object: " << Object::objs.size() << ". Colliders: " << CollMgr::Colliders.size() << endl;
-
 	//绘制
-	time_t begin_t = clock();
 	// to do 
 	myDisplay();
-	time_t finish_t = clock();
-
-	double time = (double)(finish_t - begin_t);
-	if (time < 1 / 60)
-		time = 1 / 60;
+	finish_t = clock();
+	double time = ((double)(finish_t - begin_t))/ CLOCKS_PER_SEC;
+	if (time < 1 / 40)
+		time = 1 / 40;
 	TimeMgr::deltaTime = time;
 	TimeMgr::currentTime += time;
+	begin_t = clock();
 	//计算
 	Update();
-	glutTimerFunc(17, myTimerFunc, 0);
+	glutTimerFunc(25, myTimerFunc, 0);
 }
 void Update() {
 	//计时
@@ -197,6 +226,8 @@ void Update() {
 	DestroyMgr::DestroyObj();
 }
 void myReshape(int w, int h) {
+	SceneMgr::w = w;
+	SceneMgr::h = h;
 	GLfloat nRange = 100.0f;
 	glViewport(0, 0, w, h);
 	glMatrixMode(GL_PROJECTION);
@@ -650,4 +681,19 @@ void SetLight() {
 	glPopMatrix();
 	glEnable(GL_LIGHTING);
 	glEnable(GL_LIGHT0);
+}
+void myMouseFunc(int button, int state, int x, int y) {
+	if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN) {
+	cout << "x: " << x << "\ty: " << y << endl;
+	float ix = double(x) / double(SceneMgr::w);
+	float iy = double(y) / double(SceneMgr::h);
+		for (auto enemy : EnemyMgr::Enemys) {
+			if (enemy->ScreenMaxXY.x >= ix &&
+				enemy->ScreenMinXY.x <= ix &&
+				enemy->ScreenMaxXY.y >= iy &&
+				enemy->ScreenMinXY.y <= iy) {
+				cout << "enemy!" << endl;
+			}
+		}
+	}
 }

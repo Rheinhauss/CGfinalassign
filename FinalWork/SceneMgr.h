@@ -21,11 +21,16 @@ public:
 	static std::uniform_int_distribution<int> distribution_int;
 	static std::uniform_int_distribution<float> distribution_fp;
 
+	static CMatrix ProjMatrix,ViewMatrix;
+	static float ProjMatrixArrPtr[16],ViewMatrixArrPtr[16];
 
+	static int w, h;
 	//·µ»ØËæ»úÊý
 	static double random(bool);
 	static int randint();
 	static void InitTexture();
+	static void updateProjMatrixInThis();	
+	static void updateViewMatrixInThis();
 
 private:
 

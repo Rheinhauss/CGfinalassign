@@ -31,22 +31,23 @@ void Collider::Collision(Collider *col) {
 }
 //检测A、B是否发生碰撞,发生则返回true,否则返回false
 bool Collider::Collide(Collider *A, Collider *B) {
-	CVector PA[8] = {
-		CVector(A->minXYZ.x, A->minXYZ.y, A->minXYZ.z),
-		CVector(A->minXYZ.x, A->minXYZ.y, A->maxXYZ.z),
-		CVector(A->minXYZ.x, A->maxXYZ.y, A->minXYZ.z),
-		CVector(A->minXYZ.x, A->maxXYZ.y, A->maxXYZ.z),
-		CVector(A->maxXYZ.x, A->minXYZ.y, A->minXYZ.z),
-		CVector(A->maxXYZ.x, A->minXYZ.y, A->maxXYZ.z),
-		CVector(A->maxXYZ.x, A->maxXYZ.y, A->minXYZ.z),
-		CVector(A->maxXYZ.x, A->maxXYZ.y, A->maxXYZ.z),
-	};
+	//CVector PA[8] = {
+	//	CVector(A->minXYZ.x, A->minXYZ.y, A->minXYZ.z),
+	//	CVector(A->minXYZ.x, A->minXYZ.y, A->maxXYZ.z),
+	//	CVector(A->minXYZ.x, A->maxXYZ.y, A->minXYZ.z),
+	//	CVector(A->minXYZ.x, A->maxXYZ.y, A->maxXYZ.z),
+	//	CVector(A->maxXYZ.x, A->minXYZ.y, A->minXYZ.z),
+	//	CVector(A->maxXYZ.x, A->minXYZ.y, A->maxXYZ.z),
+	//	CVector(A->maxXYZ.x, A->maxXYZ.y, A->minXYZ.z),
+	//	CVector(A->maxXYZ.x, A->maxXYZ.y, A->maxXYZ.z),
+	//};
 
 	CVector Bmax = B->maxXYZ;
 	CVector Bmin = B->minXYZ;
 	CMatrix mB = B->transform->rotation.ToCMatrix();
 	Bmax = mB.posMul(Bmax);
 	Bmin = mB.posMul(Bmin);
+
 	Bmax = Bmax + B->transform->position;
 	Bmin = Bmin + B->transform->position;
 	CVector BBmax, BBmin;
@@ -58,18 +59,43 @@ bool Collider::Collide(Collider *A, Collider *B) {
 	BBmin.z = min(Bmax.z, Bmin.z);
 	Bmax = BBmax;
 	Bmin = BBmin;
-	
+
+	CVector Amax = A->maxXYZ;
+	CVector Amin = A->minXYZ;
 	CMatrix mA = A->transform->rotation.ToCMatrix();
-	for (int i = 0; i < 8; ++i) {
-		PA[i] = mA.posMul(PA[i]);
-		PA[i] = PA[i] + A->transform->position;
-		if (PA[i].x <= Bmax.x && PA[i].x >= Bmin.x) {
-			if (PA[i].y <= Bmax.y && PA[i].y >= Bmin.y) {
-				if (PA[i].z <= Bmax.z && PA[i].z >= Bmin.z) {
-					return true;
-				}
-			}
-		}
-	}
+	Amax = mA.posMul(Amax);
+	Amin = mA.posMul(Amin);
+	Amax = Amax + A->transform->position;
+	Amin = Amin + A->transform->position;
+	CVector AAmax, AAmin;
+	AAmax.x = max(Amax.x, Amin.x);
+	AAmax.y = max(Amax.y, Amin.y);
+	AAmax.z = max(Amax.z, Amin.z);
+	AAmin.x = min(Amax.x, Amin.x);
+	AAmin.y = min(Amax.y, Amin.y);
+	AAmin.z = min(Amax.z, Amin.z);
+	Amax = AAmax;
+	Amin = AAmin;
+	return (
+			(Amin.x <= Bmax.x && Amax.x >= Bmin.x) &&
+			(Amin.y <= Bmax.y && Amax.y >= Bmin.y) &&
+			(Amin.z <= Bmax.z && Amax.z >= Bmin.z)
+		)/*||(
+			(Bmin.x <= Amax.x && Bmax.x >= Amin.x) &&
+			(Bmin.y <= Amax.y && Bmax.y >= Amin.y) &&
+			(Bmin.z <= Amax.z && Bmax.z >= Amin.z)
+			)*/;
+	//CMatrix mA = A->transform->rotation.ToCMatrix();
+	//for (int i = 0; i < 8; ++i) {
+	//	PA[i] = mA.posMul(PA[i]);
+	//	PA[i] = PA[i] + A->transform->position;
+	//	if (PA[i].x <= Bmax.x && PA[i].x >= Bmin.x) {
+	//		if (PA[i].y <= Bmax.y && PA[i].y >= Bmin.y) {
+	//			if (PA[i].z <= Bmax.z && PA[i].z >= Bmin.z) {
+	//				return true;
+	//			}
+	//		}
+	//	}
+	//}
 	return false;
 }
