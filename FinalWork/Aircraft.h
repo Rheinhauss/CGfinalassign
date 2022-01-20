@@ -24,8 +24,10 @@ private:
 	double rotSpeed;
 	//射击间隔
 	double shootInterval;
+	//无敌时间
+	double crashInterval;
 	//计时器
-	Timer *timer;
+	Timer *timerShoot, *timerCrash;
 
 	//绘制飞机
 	void DrawAircraft();

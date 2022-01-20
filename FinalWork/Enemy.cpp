@@ -20,8 +20,8 @@ Enemy::Enemy()
 	this->rptimer = new Timer();
 	//始终在y=0平面内
 	this->direction = CVector(cos(seta/180*PI), 0, sin(seta / 180 * PI));
-	this->moveSpeed = 0.05;
-	this->rotSpeed = 2;
+	this->moveSpeed = 5;
+	this->rotSpeed = 1;
 	//加入敌机列表
 	EnemyMgr::Enemys.push_back(this);
 	++EnemyMgr::curEnemyNum;

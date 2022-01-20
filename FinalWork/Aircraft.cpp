@@ -91,9 +91,12 @@ Aircraft::Aircraft()
 	this->rotSpeed = 20;
 	//设置射击间隔 s
 	this->shootInterval = 0.2;
+	this->crashInterval = 2;//无敌时间
 	//初始化计时器
-	this->timer = new Timer();
-	this->timer->start();
+	this->timerShoot = new Timer();
+	this->timerShoot->start();
+	this->timerCrash = new Timer();
+	this->timerCrash->start();
 	//初始为驾驶模式
 	this->pattern = true;
 	//初始化目标敌机,置为空
@@ -112,7 +115,7 @@ Aircraft::Aircraft()
 
 Aircraft::~Aircraft()
 {
-	delete this->timer;
+	delete this->timerShoot;
 }
 
 //绘制飞机
@@ -154,20 +157,20 @@ void Aircraft::DrawAircraft() {
 	glScalef(10, 10, 10);
 
 	//Draw::LoadPlane_GLTextures();
-	//glEnable(GL_TEXTURE_2D);
-	//glBindTexture(GL_TEXTURE_2D, TextureMgr::textures[3]);
-	//glEnable(GL_TEXTURE_GEN_S);
-	//glEnable(GL_TEXTURE_GEN_T);
-	//glFrontFace(GL_CW);
+	glEnable(GL_TEXTURE_2D);
+	glBindTexture(GL_TEXTURE_2D, TextureMgr::textures[3]);
+	glEnable(GL_TEXTURE_GEN_S);
+	glEnable(GL_TEXTURE_GEN_T);
+	glFrontFace(GL_CW);
 	//机身
 	glColor3f(1, 0, 1);
 	glTranslatef(0.04f, -0.05f, -0.9f);
 	glScalef(0.1f, 0.1f, 1.5f);
 	Cylinder();
-	//glDisable(GL_TEXTURE_GEN_S);
-	//glDisable(GL_TEXTURE_GEN_T);
-	//glDisable(GL_TEXTURE_2D);
-	//glFrontFace(GL_CCW);
+	glDisable(GL_TEXTURE_GEN_S);
+	glDisable(GL_TEXTURE_GEN_T);
+	glDisable(GL_TEXTURE_2D);
+	glFrontFace(GL_CCW);
 
 	glColor3f(0, 1, 0);
 	glScalef(1, 1, 0.2f);
@@ -233,21 +236,21 @@ void Aircraft::Rotate() {
 //射击,按下空格/上帝视角模式调用
 void Aircraft::Shoot() {
 	//计时器时间<冷却间隔,不能发射子弹
-	if (this->timer->time < this->shootInterval) {
+	if (this->timerShoot->time < this->shootInterval) {
 		return;
 	}
 	//驾驶模式
 	if (this->pattern == true && InputManager::KEY_SPACE) {
 		//发射子弹
   		new Bullet();
-		this->timer->time = 0;
+		this->timerShoot->time = 0;
 		return;
 	}
 	//上帝视角模式
 	else if(this->pattern == false){
 		//发射子弹
 		new Bullet();
-		this->timer->time = 0;
+		this->timerShoot->time = 0;
 		return;
 	}
 }
@@ -313,9 +316,15 @@ void Aircraft::Collision(Collider *col) {
 		return;
 	}
 	else if (col->tag == "meteorite") {
-		++PlayerMgr::colMeteNum;
+		if (timerCrash->time >= crashInterval) {
+			++PlayerMgr::colMeteNum;
+			timerCrash->start();
+		}
 	}
 	else if (col->tag == "enemy") {
-		++PlayerMgr::colEnemyNum;
+		if (timerCrash->time >= crashInterval) {
+			++PlayerMgr::colEnemyNum;
+			timerCrash->start();
+		}
 	}
 }

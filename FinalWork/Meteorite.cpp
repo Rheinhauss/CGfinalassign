@@ -14,7 +14,7 @@ Meteorite::Meteorite(MeteRange*_mr):mr(_mr)
 	timer->start();
 	//始终在y=0平面内
 	this->direction = CVector((float)SceneMgr::random(true), 0, (float)SceneMgr::random(true));
-	this->moveSpeed = 0.03;
+	this->moveSpeed = 3;
 	MeteMgr::Metes.push_back(this);
 	float _r = mr->minRange + SceneMgr::random(false) * (mr->maxRange - mr->minRange),
 		_s = SceneMgr::random(false) * 360.0;
