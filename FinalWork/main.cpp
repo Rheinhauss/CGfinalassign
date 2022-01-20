@@ -131,7 +131,7 @@ void myDisplay() {
 
 	glPushMatrix();
 	//Ìì¿ÕºÐ
-	//SceneMgr::skybox->CreateSkyBox();
+	SceneMgr::skybox->CreateSkyBox();
 	glPopMatrix();
 	drawCoordinates();
 

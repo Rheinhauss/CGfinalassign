@@ -6,7 +6,7 @@ SkyBox::SkyBox() {
 
 SkyBox::SkyBox(char *front, char *back, char *top, char *bottom, char *left, char *right) {
 	m_vertical = -50;
-	m_size = 500;
+	m_size = 100000;
 	m_front = front;
 	m_top = top;
 	m_bottom = bottom;
