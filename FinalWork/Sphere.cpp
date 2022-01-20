@@ -117,9 +117,11 @@ void Sphere::Draw(GLfloat radius, int lon, int lat, GLuint text)	//使用经度分割l
 			glNormal3fv(norm[index[0]]);
 			applyUV(norm[index[0]]);
 			glVertex3fv(vert[index[0]]);
+
 			glNormal3fv(norm[index[1]]);
 			applyUV(norm[index[1]]);
 			glVertex3fv(vert[index[1]]);
+
 			glNormal3fv(norm[index[2]]);
 			applyUV(norm[index[2]]);
 			glVertex3fv(vert[index[2]]);
@@ -127,15 +129,18 @@ void Sphere::Draw(GLfloat radius, int lon, int lat, GLuint text)	//使用经度分割l
 			glNormal3fv(norm[index[2]]);
 			applyUV(norm[index[2]]);
 			glVertex3fv(vert[index[2]]);
+
 			glNormal3fv(norm[index[3]]);
 			applyUV(norm[index[3]]);
 			glVertex3fv(vert[index[3]]);
+
 			glNormal3fv(norm[index[0]]);
 			applyUV(norm[index[0]]);
 			glVertex3fv(vert[index[0]]);
 		}
 	}
 	glEnd();
+	glFrontFace(GL_CCW);
 	//glDisable(GL_TEXTURE_GEN_S);
 	//glDisable(GL_TEXTURE_GEN_T);
 	glDisable(GL_TEXTURE_2D);
