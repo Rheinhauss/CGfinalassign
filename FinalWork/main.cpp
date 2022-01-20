@@ -684,7 +684,7 @@ void SetLight() {
 	GLfloat static seta = 0;
 	seta += 1;
 	glPushMatrix();
-	glTranslatef(100, 0, -200.0f);
+	glTranslatef(0, 0, 0);
 	glRotatef(seta, 1, 1, 1);
 	glTranslatef(pos[0], pos[1], pos[2]);
 	glColor3f(1, 0, 0);
