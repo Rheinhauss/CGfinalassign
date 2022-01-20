@@ -34,7 +34,7 @@ void MeteMgr::add() {
 	//设置Transform,位置在陨石带内,旋转为前进方向,设置scale,使不同陨石大小不一致
 	//更改scale的时候还需要更改minXYZ,maxXYZ
 	double b = (SceneMgr::random(false) / 1.5) * ((SceneMgr::randint() % 2 == 0) ? 1.0 : -1.0) + 2.0;
-	p->transform->scale = p->transform->scale * b;
+	//p->transform->scale = p->transform->scale * b;
 	p->minXYZ = p->minXYZ * b;
 	p->     maxXYZ = p->maxXYZ * b;
 }

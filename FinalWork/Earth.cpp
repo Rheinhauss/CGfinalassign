@@ -1,6 +1,7 @@
 #include "Earth.h"
-#include"glut.h"
 #include "Sun.h"
+#include "TextureMgr.h"
+#include"Sphere.h"
 Earth::Earth()
 {
 	this->name = "earth";
@@ -15,7 +16,8 @@ Earth::~Earth()
 //绘制地球球体+贴上纹理贴图
 void Earth::DrawEarth() {
 	glPushMatrix();
-	glutSolidSphere(this->radius, 50, 50);
+	//glutSolidSphere(this->radius, 50, 50);
+	Sphere::Draw(this->radius, 100, 100, TextureMgr::textures[1]);
 	glPopMatrix();
 	//todo
 }

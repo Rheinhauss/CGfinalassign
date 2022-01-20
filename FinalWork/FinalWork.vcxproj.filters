@@ -105,6 +105,9 @@
     <ClCompile Include="TextureMgr.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="Draw.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SkyBox.h">
@@ -195,6 +198,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="TextureMgr.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Draw.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

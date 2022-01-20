@@ -1,6 +1,7 @@
 #include "engine.h"
 #include <time.h>
 #include <string>
+#include "Draw.h"
 /*
 	FPS:60
 */
@@ -23,7 +24,6 @@ void myMouseFunc(int button, int state, int x, int y);
 
 int main(int argc, char *argv[])
 {
-	Init();
 
 
 	glutInit(&argc, argv);//初始化
@@ -31,6 +31,7 @@ int main(int argc, char *argv[])
 	glutInitWindowPosition(150, 50);//设置初始窗口的位置
 	glutInitWindowSize(1024, 768);//设置窗口初始大小
 	glutCreateWindow("FinalWork");//设置窗口标题
+	Init();
 	glutDisplayFunc(&myDisplay);//glutDisplayFunc(&display)在程序运行时是自动调用的，即程序会自动调用display函数重绘窗口
 	glutTimerFunc(17, myTimerFunc, 0);
 	glutReshapeFunc(&myReshape);
@@ -149,17 +150,25 @@ void myDisplay() {
 
 
 	//绘制物体	
-	glEnable(GL_TEXTURE_2D);
+	//glEnable(GL_TEXTURE_2D);
 
-	glBindTexture(GL_TEXTURE_2D, TextureMgr::textures[2]);
+	//glBindTexture(GL_TEXTURE_2D, TextureMgr::textures[3]);
 
-	glEnable(GL_TEXTURE_GEN_S);
-	glEnable(GL_TEXTURE_GEN_T);
-	//glutSolidCube(90);
-	glDisable(GL_TEXTURE_GEN_S);
-	glDisable(GL_TEXTURE_GEN_T);
+	//glEnable(GL_TEXTURE_GEN_S);
+	//glEnable(GL_TEXTURE_GEN_T);
+	//glFrontFace(GL_CW);
+ //   glutSolidCube(90);
+	//glFrontFace(GL_CCW);
+	//glDisable(GL_TEXTURE_GEN_S);
+	//glDisable(GL_TEXTURE_GEN_T);
 
-	glDisable(GL_TEXTURE_2D);
+	//glDisable(GL_TEXTURE_2D);
+	//glPushMatrix();
+	//glScalef(1.1, 1.1, 1.1);
+	//glTranslatef(10, 10, 10);
+	//glRotatef(10, 1, 1, 1);
+	//Draw::drawEarth(1, 10, 10);
+	//glPopMatrix();
 	int len = (int)Object::objs.size();
 	for (int i = 0; i < len; ++i) {
 		//转为物体的变换
@@ -657,6 +666,9 @@ void SetRC() {
 	glEnable(GL_LINE_SMOOTH);//过虑线段的锯齿
 
 	glEnable(GL_DEPTH_TEST);
+	//glTexGeni(GL_S, GL_TEXTURE_GEN_MODE, GL_SPHERE_MAP);
+	//glTexGeni(GL_T, GL_TEXTURE_GEN_MODE, GL_SPHERE_MAP); 
+
 	//	glDisable(GL_DEPTH_TEST);
 	//glTexGeni(GL_S, GL_TEXTURE_GEN_MODE, GL_SPHERE_MAP);
 	//glTexGeni(GL_T, GL_TEXTURE_GEN_MODE, GL_SPHERE_MAP);

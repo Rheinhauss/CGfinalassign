@@ -4,6 +4,7 @@
 #include "TimeMgr.h"
 #include "DestroyMgr.h"
 #include "TextureMgr.h"
+#include "Sphere.h"
 
 Meteorite::Meteorite(MeteRange*_mr):mr(_mr)
 {
@@ -53,7 +54,8 @@ void Meteorite::DrawMeteorite() {
 	//glBindTexture(GL_TEXTURE_2D, TextureMgr::textures[2]);
 	//glEnable(GL_TEXTURE_GEN_S);
 	//glEnable(GL_TEXTURE_GEN_T);
-	glutSolidSphere(1, 5, 5);
+	//glutSolidSphere(1, 5, 5);
+	Sphere::Draw(1, 10, 10, TextureMgr::textures[2]);
 	//glDisable(GL_TEXTURE_GEN_S);
 	//glDisable(GL_TEXTURE_GEN_T);
 	//glDisable(GL_TEXTURE_2D);
