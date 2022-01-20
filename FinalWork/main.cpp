@@ -149,12 +149,16 @@ void myDisplay() {
 
 
 	//ªÊ÷∆ŒÔÃÂ	
+	glEnable(GL_TEXTURE_2D);
+
 	glBindTexture(GL_TEXTURE_2D, TextureMgr::textures[2]);
+
 	glEnable(GL_TEXTURE_GEN_S);
 	glEnable(GL_TEXTURE_GEN_T);
 	//glutSolidCube(90);
 	glDisable(GL_TEXTURE_GEN_S);
 	glDisable(GL_TEXTURE_GEN_T);
+
 	glDisable(GL_TEXTURE_2D);
 	int len = (int)Object::objs.size();
 	for (int i = 0; i < len; ++i) {

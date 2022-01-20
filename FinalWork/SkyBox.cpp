@@ -41,62 +41,64 @@ void SkyBox::CreateSkyBox() {
 	glEnable(GL_TEXTURE_GEN_T);
 	glFrontFace(GL_CW);
 	//底部
-	texture(m_texture[SKY_BOTTOM]);
-	glBegin(GL_QUADS);
-	glTexCoord2f(1.0f, 0.0f);
-	glVertex3f(m_size, -m_size, -m_size);
-	glTexCoord2f(1.0f, 1.0f);
-	glVertex3f(-m_size, -m_size, -m_size);
-	glTexCoord2f(0.0f, 1.0f);
-	glVertex3f(-m_size, -m_size, m_size);
-	glTexCoord2f(0.0f, 0.0f);
-	glVertex3f(m_size, -m_size, m_size);
-	glEnd();
+	{
+		texture(m_texture[SKY_BOTTOM]);
+		glBegin(GL_QUADS);
+		glTexCoord2f(1.0f, 0.0f);
+		glVertex3f(m_size, -m_size, -m_size);
+		glTexCoord2f(1.0f, 1.0f);
+		glVertex3f(-m_size, -m_size, -m_size);
+		glTexCoord2f(0.0f, 1.0f);
+		glVertex3f(-m_size, -m_size, m_size);
+		glTexCoord2f(0.0f, 0.0f);
+		glVertex3f(m_size, -m_size, m_size);
+		glEnd();
 
-	//前面
-	texture(m_texture[SKY_FRONT]);
-	glBegin(GL_QUADS);
-	glTexCoord2f(0.0f, 0.0f); glVertex3f(-m_size, -m_size, -m_size);
-	glTexCoord2f(1.0f, 0.0f); glVertex3f(m_size, -m_size, -m_size);
-	glTexCoord2f(1.0f, 1.0f); glVertex3f(m_size, m_size, -m_size);
-	glTexCoord2f(0.0f, 1.0f); glVertex3f(-m_size, m_size, -m_size);
-	glEnd();
+		//前面
+		texture(m_texture[SKY_FRONT]);
+		glBegin(GL_QUADS);
+		glTexCoord2f(0.0f, 0.0f); glVertex3f(-m_size, -m_size, -m_size);
+		glTexCoord2f(1.0f, 0.0f); glVertex3f(m_size, -m_size, -m_size);
+		glTexCoord2f(1.0f, 1.0f); glVertex3f(m_size, m_size, -m_size);
+		glTexCoord2f(0.0f, 1.0f); glVertex3f(-m_size, m_size, -m_size);
+		glEnd();
 
-	//背面
-	texture(m_texture[SKY_BACK]);
-	glBegin(GL_QUADS);
-	glTexCoord2f(0.0f, 0.0f); glVertex3f(m_size, -m_size, m_size);
-	glTexCoord2f(1.0f, 0.0f); glVertex3f(-m_size, -m_size, m_size);
-	glTexCoord2f(1.0f, 1.0f); glVertex3f(-m_size, m_size, m_size);
-	glTexCoord2f(0.0f, 1.0f); glVertex3f(m_size, m_size, m_size);
-	glEnd();
+		//背面
+		texture(m_texture[SKY_BACK]);
+		glBegin(GL_QUADS);
+		glTexCoord2f(0.0f, 0.0f); glVertex3f(m_size, -m_size, m_size);
+		glTexCoord2f(1.0f, 0.0f); glVertex3f(-m_size, -m_size, m_size);
+		glTexCoord2f(1.0f, 1.0f); glVertex3f(-m_size, m_size, m_size);
+		glTexCoord2f(0.0f, 1.0f); glVertex3f(m_size, m_size, m_size);
+		glEnd();
 
-	//右面
-	texture(m_texture[SKY_RIGHT]);
-	glBegin(GL_QUADS);
-	glTexCoord2f(1.0f, 0.0f); glVertex3f(m_size, -m_size, m_size);
-	glTexCoord2f(1.0f, 1.0f); glVertex3f(m_size, m_size, m_size);
-	glTexCoord2f(0.0f, 1.0f); glVertex3f(m_size, m_size, -m_size);
-	glTexCoord2f(0.0f, 0.0f); glVertex3f(m_size, -m_size, -m_size);
-	glEnd();
+		//右面
+		texture(m_texture[SKY_RIGHT]);
+		glBegin(GL_QUADS);
+		glTexCoord2f(1.0f, 0.0f); glVertex3f(m_size, -m_size, m_size);
+		glTexCoord2f(1.0f, 1.0f); glVertex3f(m_size, m_size, m_size);
+		glTexCoord2f(0.0f, 1.0f); glVertex3f(m_size, m_size, -m_size);
+		glTexCoord2f(0.0f, 0.0f); glVertex3f(m_size, -m_size, -m_size);
+		glEnd();
 
-	//左面
-	texture(m_texture[SKY_LEFT]);
-	glBegin(GL_QUADS);
-	glTexCoord2f(1.0f, 0.0f); glVertex3f(-m_size, -m_size, -m_size);
-	glTexCoord2f(1.0f, 1.0f); glVertex3f(-m_size, m_size, -m_size);
-	glTexCoord2f(0.0f, 1.0f); glVertex3f(-m_size, m_size, m_size);
-	glTexCoord2f(0.0f, 0.0f); glVertex3f(-m_size, -m_size, m_size);
-	glEnd();
+		//左面
+		texture(m_texture[SKY_LEFT]);
+		glBegin(GL_QUADS);
+		glTexCoord2f(1.0f, 0.0f); glVertex3f(-m_size, -m_size, -m_size);
+		glTexCoord2f(1.0f, 1.0f); glVertex3f(-m_size, m_size, -m_size);
+		glTexCoord2f(0.0f, 1.0f); glVertex3f(-m_size, m_size, m_size);
+		glTexCoord2f(0.0f, 0.0f); glVertex3f(-m_size, -m_size, m_size);
+		glEnd();
 
-	//顶部
-	texture(m_texture[SKY_TOP]);
-	glBegin(GL_QUADS);
-	glTexCoord2f(1.0f, 0.0f); glVertex3f(-m_size, m_size, -m_size);
-	glTexCoord2f(1.0f, 1.0f); glVertex3f(m_size, m_size, -m_size);
-	glTexCoord2f(0.0f, 1.0f); glVertex3f(m_size, m_size, m_size);
-	glTexCoord2f(0.0f, 0.0f); glVertex3f(-m_size, m_size, m_size);
-	glEnd();
+		//顶部
+		texture(m_texture[SKY_TOP]);
+		glBegin(GL_QUADS);
+		glTexCoord2f(1.0f, 0.0f); glVertex3f(-m_size, m_size, -m_size);
+		glTexCoord2f(1.0f, 1.0f); glVertex3f(m_size, m_size, -m_size);
+		glTexCoord2f(0.0f, 1.0f); glVertex3f(m_size, m_size, m_size);
+		glTexCoord2f(0.0f, 0.0f); glVertex3f(-m_size, m_size, m_size);
+		glEnd();
+	}
 	glDisable(GL_TEXTURE_GEN_S);
 	glDisable(GL_TEXTURE_GEN_T);
 	glDisable(GL_TEXTURE_2D);
@@ -140,7 +142,7 @@ bool SkyBox::LoadBitMapTexture(char *filename, GLuint &texture) {
 	//filter 参数
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR_MIPMAP_LINEAR);	// Linear Filtering
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);	// Linear Filteringd
-																					//glDisable(GL_CULL_FACE);
+																				
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 
