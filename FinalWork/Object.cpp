@@ -7,7 +7,7 @@ Object::Object()
 {
 	this->name = "";
 	this->tag = "";
-	this->transform = new Transfrom();
+	this->transform = new Transform();
 	Object::objs.push_back(this);
 }
 

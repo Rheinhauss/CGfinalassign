@@ -70,9 +70,12 @@ void Enemy::Update() {
 	ScreenMinXY.y = min(a.y, b.y);
 }
 void Enemy::Collision(Collider *col) {
-	if ((col->tag == "enemy"))return;
-	else if ((col->tag == "Aircraft"))return;
-	else if ((col->tag == "meteorite"))return;
+	if ((col->tag == "enemy"))
+		return;
+	else if ((col->tag == "Aircraft"))
+		return;
+	else if ((col->tag == "meteorite"))
+		return;
 	else 
 		EnemyMgr::DestroyEnemy(this);
 }

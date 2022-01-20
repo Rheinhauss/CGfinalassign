@@ -117,6 +117,11 @@ Aircraft::~Aircraft()
 
 //绘制飞机
 void Aircraft::DrawAircraft() {
+	//glEnable(GL_TEXTURE_2D);
+	//glBindTexture(GL_TEXTURE_2D, TextureMgr::textures[3]);
+	//gluSphere(TextureMgr::e_tex, 5, 10, 10);
+	//glBindTexture(GL_TEXTURE_2D, 0);
+	//glDisable(GL_TEXTURE_2D);
 	//绘制+纹理贴图
 	//glBegin(GL_LINES);
 	//glVertex3f(0, 0, 0);

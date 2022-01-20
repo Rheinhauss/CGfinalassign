@@ -129,11 +129,10 @@ void myDisplay() {
 	//设置摄像机
 	SetView();
 
-	//glPushMatrix();
-	////天空盒
-	//glTranslatef(0, 0, -100);
-	////SceneMgr::skybox->CreateSkyBox();
-	//glPopMatrix();
+	glPushMatrix();
+	//天空盒
+	//SceneMgr::skybox->CreateSkyBox();
+	glPopMatrix();
 	drawCoordinates();
 
 
@@ -147,7 +146,7 @@ void myDisplay() {
 	glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, dif);
 	glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, spe);
 	glLightModeli(GL_LIGHT_MODEL_TWO_SIDE, GL_TRUE);
-
+	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
 	//绘制物体	
 	//glEnable(GL_TEXTURE_2D);
@@ -181,6 +180,7 @@ void myDisplay() {
 		glMultMatrixf(rot);
 		Object::objs[i]->Render();
 		glPopMatrix();
+		//cout << Object::objs[i]->name << endl;
 	}
 	glPopMatrix();
 

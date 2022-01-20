@@ -2,7 +2,7 @@
 #include <cmath>
 #include "CVector.h"
 #include "CMatrix.h"
-GLfloat(*Sphere::vert)[3] = 0, (*Sphere::norm)[3] = 0;
+GLfloat(*Sphere::vert)[3] = { 0 }, (*Sphere::norm)[3] = { 0 };
 int Sphere::nVert = 0;
 void Sphere::CalculateNormal(GLfloat v1[], GLfloat v2[], GLfloat v3[], GLfloat normal[])
 {
@@ -29,10 +29,10 @@ void Sphere::normalize(GLfloat* v)
 }
 
 void Sphere::applyUV(GLfloat* norm) {
-	auto d = CVector(-norm[0], -norm[1], -norm[2]);
-	d.Normalize();
-	float u = 0.5 + atan2f(d.y, d.x) / (2 * PI), v = 0.5 - asinf(d.z) / PI;
-	glTexCoord2f(u, v);
+	//auto d = CVector(-norm[0], -norm[1], -norm[2]);
+	//d.Normalize();
+	//float u = 0.5 + atan2f(d.y, d.x) / (2 * PI), v = 0.5 - asinf(d.z) / PI;
+	////glTexCoord2f(u, v);
 }
 void Sphere::Draw(GLfloat radius, int lon, int lat, GLuint text)	//使用经度分割lon,维度分割lat,半径radius绘制一个球。
 {

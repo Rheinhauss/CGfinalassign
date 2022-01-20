@@ -2,7 +2,6 @@
 #include <iostream>
 using namespace std;
 #include "Transform.h"
-class Transform;
 #include <vector>
 
 class Object
@@ -16,7 +15,7 @@ public:
 	//标签
 	string tag;
 	//物体的Transform组件
-	Transfrom *transform;
+	Transform *transform;
 	//需要绘制的内容,实现即可,会自动根据Transform绘制
 	virtual void Render();
 	//每帧需要执行的内容,实现此函数即可,会自动每帧调用

@@ -6,9 +6,15 @@
 #include "glew.h"
 #include "glut.h"
 #include <iostream>
+#include "SceneMgr.h"
 GLuint TextureMgr::textures[10]{};
 GLUquadricObj* TextureMgr::e_tex = gluNewQuadric();
 void TextureMgr::init() {
+		//Éú³ÉÌì¿ÕºÐ
+		SceneMgr::skybox = new SkyBox((char*)"../run/skybox\\siege_ft.bmp", (char*)"../run/skybox\\siege_bk.bmp",
+			(char*)"../run/skybox\\siege_up.bmp", (char*)"../run/skybox\\siege_dn.bmp",
+			(char*)"../run/skybox\\siege_rt.bmp", (char*)"../run/skybox\\siege_lf.bmp");
+		SceneMgr::skybox->setSkyBox(-10, 10);
 	char name[4][10]{
 		"Sun.bmp",
 		"Earth.bmp",

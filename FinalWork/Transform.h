@@ -2,11 +2,11 @@
 #include "CVector.h"
 #include "CQuaternion.h"
 
-class Transfrom
+class Transform
 {
 public:
-	Transfrom();
-	~Transfrom();
+	Transform();
+	~Transform();
 
 	CVector position;
 	CQuaternion rotation;
