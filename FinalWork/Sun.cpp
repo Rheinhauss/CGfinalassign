@@ -8,7 +8,7 @@ Sun::Sun()
 {
 	this->name = "sun";
 	this->tag = "sun";
-	this->radius = 8;
+	this->radius = 24;
 	this->transform->position = CVector(0, 0, 0);
 	pos = CVector(0, 0, 0);
 }

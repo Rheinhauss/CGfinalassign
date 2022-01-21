@@ -6,7 +6,7 @@ Earth::Earth()
 {
 	this->name = "earth";
 	this->tag = "earth";
-	this->radius = 5;
+	this->radius = 13;
 }
 
 Earth::~Earth()

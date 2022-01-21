@@ -132,6 +132,7 @@ void Camera::ChangePattern() {
 		//到达目标后摄像机位置和旋转均置 0	(也可能会调整,使初始视角处于一个更好的位置)，置过渡态isTrans为false,会自动绑定到飞机上
 		//todo_wyx -> 确定一下目标处的位置旋转 -> 摄像机位于飞机的起始点的世界transform
 		Transform* F_target = new Transform();
+		
 
 		float t = 0.01f;
 		//插值
@@ -155,9 +156,11 @@ void Camera::ChangePattern() {
 		//到达目标后,置过渡态isTrans为false
 		
 		//todo_wyx -> 确定一下目标处的位置旋转 -> 当前屏幕的中心位置的世界transform
-		static Transform* T_target;
+		static Transform* T_target = new Transform;
+		T_target->position = CVector(0, 100, 0);
+		T_target->rotation = CEuler(180, -90, 0).ToQuaternion();
 
-		float t = 0.01f;
+		float t = 0.02f;
 		//插值
 		transform->position = transform->position + (T_target->position - transform->position) * t;
 		transform->rotation = transform->rotation.Slerp(T_target->rotation, t);

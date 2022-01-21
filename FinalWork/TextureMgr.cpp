@@ -14,7 +14,7 @@ void TextureMgr::init() {
 		SceneMgr::skybox = new SkyBox((char*)"sky.png", (char*)"sky.png",
 			(char*)"sky.png", (char*)"sky.png",
 			(char*)"sky.png", (char*)"sky.png");
-		SceneMgr::skybox->setSkyBox(-10, 40);
+		SceneMgr::skybox->setSkyBox(-10, 500);
 	char name[4][10]{
 		"Sun.bmp",
 		"Earth.bmp",

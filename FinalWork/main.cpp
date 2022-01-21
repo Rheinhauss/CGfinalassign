@@ -21,6 +21,7 @@ void Init();//游戏的所有初始化操作
 void SetLight();
 void myMouseFunc(int button, int state, int x, int y);
 
+const int WINDOW_WIDTH = 1024, WINDOW_HEIGHT = 768;
 
 int main(int argc, char *argv[])
 {
@@ -29,7 +30,7 @@ int main(int argc, char *argv[])
 	glutInit(&argc, argv);//初始化
 	glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);//指定窗口显示模式的类型
 	glutInitWindowPosition(150, 50);//设置初始窗口的位置
-	glutInitWindowSize(1024, 768);//设置窗口初始大小
+	glutInitWindowSize(WINDOW_WIDTH, WINDOW_HEIGHT);//设置窗口初始大小
 	glutCreateWindow("FinalWork");//设置窗口标题
 	Init();
 	glutDisplayFunc(&myDisplay);//glutDisplayFunc(&display)在程序运行时是自动调用的，即程序会自动调用display函数重绘窗口
@@ -50,6 +51,7 @@ void Init() {
 	SceneMgr::InitTexture();
 	//生成摄像机
 	camera = new Camera();
+	PlayerMgr::camera = camera;
 	////生成天空盒
 	//SceneMgr::skybox = new SkyBox((char *) "../run/skybox\\siege_ft.bmp", (char *) "../run/skybox\\siege_bk.bmp",
 	//	(char *) "../run/skybox\\siege_up.bmp", (char *) "../run/skybox\\siege_dn.bmp",
@@ -700,9 +702,12 @@ void SetLight() {
 }
 void myMouseFunc(int button, int state, int x, int y) {
 	if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN) {
-	cout << "x: " << x << "\ty: " << y << endl;
-	float ix = double(x) / double(SceneMgr::w);
-	float iy = double(y) / double(SceneMgr::h);
+		cout << "x: " << x << "\ty: " << y << endl;
+		PlayerMgr::raypicking(x, y, WINDOW_WIDTH, WINDOW_HEIGHT);
+	
+		/*
+		float ix = double(x) / double(SceneMgr::w);
+		float iy = double(y) / double(SceneMgr::h);
 		for (auto enemy : EnemyMgr::Enemys) {
 			if (enemy->ScreenMaxXY.x >= ix &&
 				enemy->ScreenMinXY.x <= ix &&
@@ -710,6 +715,6 @@ void myMouseFunc(int button, int state, int x, int y) {
 				enemy->ScreenMinXY.y <= iy) {
 				cout << "enemy!" << endl;
 			}
-		}
+		}*/
 	}
 }

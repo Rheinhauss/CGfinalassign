@@ -21,9 +21,10 @@ void MeteMgr::DestroyMete(Meteorite* m) {
 //初始化边界和陨石
 void MeteMgr::Init() {
 	//生成2个陨石带
-	MeteRanges.push_back(new MeteRange(30, 45));
-	MeteRanges.push_back(new MeteRange(70, 100));
+	MeteRanges.push_back(new MeteRange(50, 80));
+	MeteRanges.push_back(new MeteRange(120, 200));
 	//在陨石带中生成陨石
+	add(); add(); add(); add(); add();
 	add(); add(); add(); add(); add();
 	add(); add(); add(); add(); add();
 	add(); add(); add(); add(); add();

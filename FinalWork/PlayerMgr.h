@@ -1,6 +1,7 @@
 #pragma once
 #include "Aircraft.h"
 #include "Bullet.h"
+#include "Camera.h"
 #include <vector>
 
 class PlayerMgr
@@ -22,8 +23,14 @@ public:
 	//游戏计时
 	static Timer* timeUsed;
 
+	static Camera* camera;
+
+	static bool isChasing;
+
+
 	//删除子弹
 	static void DestroyBullet(Bullet* b);
+	static bool raypicking(int window_x, int window_y, int width, int height);
 
 
 private:

@@ -142,6 +142,7 @@
     <ClCompile Include="CVector.cpp" />
     <ClCompile Include="DestroyMgr.cpp" />
     <ClCompile Include="Draw.cpp" />
+    <ClCompile Include="RayPicking.cpp" />
     <ClCompile Include="Sphere.cpp" />
     <ClCompile Include="Earth.cpp" />
     <ClCompile Include="Enemy.cpp" />
@@ -175,6 +176,7 @@
     <ClInclude Include="CVector.h" />
     <ClInclude Include="DestroyMgr.h" />
     <ClInclude Include="Draw.h" />
+    <ClInclude Include="RayPicking.h" />
     <ClInclude Include="Sphere.h" />
     <ClInclude Include="Earth.h" />
     <ClInclude Include="Enemy.h" />
