@@ -151,6 +151,12 @@ bool SkyBox::LoadBitMapTexture(char *filename, GLuint &texture) {
 																	//	glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE,GL_BLEND);
 	float col[4] = { 1,1,1 };
 	glTexEnvfv(GL_TEXTURE_ENV, GL_TEXTURE_ENV_COLOR, col);	//颜色直接相乘
+	float zPlane1[4] = { 0.2,0.2,0.2,0 };
+	float zPlane2[4] = { 0.2,0.2,0.2,0 };
+	glTexGeni(GL_S, GL_TEXTURE_GEN_MODE, GL_OBJECT_LINEAR);
+	glTexGeni(GL_T, GL_TEXTURE_GEN_MODE, GL_OBJECT_LINEAR);
+	glTexGenfv(GL_S, GL_OBJECT_PLANE, zPlane1);
+	glTexGenfv(GL_T, GL_OBJECT_PLANE, zPlane2);
 	return TRUE;
 }
 
