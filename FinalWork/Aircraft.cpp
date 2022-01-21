@@ -259,8 +259,12 @@ void Aircraft::Shoot() {
 
 //上帝模式追击敌机
 void Aircraft::PursueTarget() {
+	if (this->isChasing == false)
+		return;
+
 	//判断目标是否为空,为空则停滞,无任何操作
 	if (this->target == nullptr) {//delete之后？
+		this->isChasing = false;
 		return;
 	}
 	//不为空

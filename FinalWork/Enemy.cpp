@@ -3,6 +3,7 @@
 #include "EnemyMgr.h"
 #include "TimeMgr.h"
 #include "glut.h"
+#include "PlayerMgr.h"
 
 Enemy::Enemy()
 {
@@ -40,6 +41,10 @@ Enemy::~Enemy()
 	{
 		if (*it == this)
 		{
+				if (*it == PlayerMgr::Player->target) {
+				PlayerMgr::Player->isChasing = false;
+				PlayerMgr::Player->target = nullptr;
+			}
 			it = EnemyMgr::Enemys.erase(it);
 			break;
 		}

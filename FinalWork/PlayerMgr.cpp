@@ -49,7 +49,7 @@ bool PlayerMgr::raypicking(int mouse_x, int mouse_y, int width, int height) {
 	ray_eye = CVector(ray_eye.x, ray_eye.y, -1.0);//vector
 	CVector ray_wor = (SceneMgr::ViewMatrix.GetInverse().vecMul(ray_eye)).Normalized();
 	CVector ray_pos = camera->transform->position; 
-	Enemy* enemy_picked;
+	Enemy* enemy_picked = nullptr;
 	bool found = false;
 	for (auto e: EnemyMgr::Enemys) {
 		CVector Amax = e->maxXYZ;

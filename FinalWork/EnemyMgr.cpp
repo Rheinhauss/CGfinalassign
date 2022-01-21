@@ -41,6 +41,7 @@ void EnemyMgr::CreateEnemy() {
 //删除敌机
 void EnemyMgr::DestroyEnemy(Enemy* e) {
 	DestroyMgr::add(e);
+	EnemyMgr::add();
 }
 
 //初始化,开始生成一定数量敌机生成点和敌机
