@@ -21,7 +21,7 @@ int EnemyMgr::curEnemyNum = 0;
 //最大敌机数
 int EnemyMgr::maxEnemyNum = 8;
 //敌机生成时间间隔
-double EnemyMgr::timeInterval = 50;
+double EnemyMgr::timeInterval = 1;
 //敌机生成计时器
 Timer* EnemyMgr::timer = new Timer();
 //每帧调用
@@ -41,7 +41,6 @@ void EnemyMgr::CreateEnemy() {
 //删除敌机
 void EnemyMgr::DestroyEnemy(Enemy* e) {
 	DestroyMgr::add(e);
-	EnemyMgr::add();
 }
 
 //初始化,开始生成一定数量敌机生成点和敌机
