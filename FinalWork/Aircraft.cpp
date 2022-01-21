@@ -223,6 +223,8 @@ void Aircraft::Rotate() {
 		CMatrix m;
 		m.SetRotate(rotSpeed * TimeMgr::deltaTime, _up());
 		this->transform->rotation = m.ToCQuaternion() * this->transform->rotation;
+		h += rotSpeed * TimeMgr::deltaTime;
+		h = fmod(h, 360);
 	}
 	if (InputManager::KEY_RIGHT) {
 		//获取飞机的上方单位向量 up
@@ -230,6 +232,8 @@ void Aircraft::Rotate() {
 		CMatrix m;
 		m.SetRotate(-rotSpeed * TimeMgr::deltaTime, _up());
 		this->transform->rotation = m.ToCQuaternion() * this->transform->rotation;
+		h -= rotSpeed * TimeMgr::deltaTime;
+		h = fmod(h, 360);
 	}
 }
 
@@ -278,12 +282,16 @@ void Aircraft::PursueTarget() {
 	rnow.Slerp(rend,0.2)
 	*/
 	//每帧变化	moveSpeed * TimeMgr::deltaTime	rotSpeed * TimeMgr::deltaTime
-	double _ran = -atan2(vtmp.z, vtmp.x)/PI*180.0;
-	double _ht1 = this->transform->rotation.ToCEuler().h;
-	//_ht1 += (_ht1 < 0 ? 360 : 0);
+	
+
+	double _ran = -(atan2(vtmp.z, vtmp.x)/PI*180.0-90);
+	//double _ht1 = this->transform->rotation.ToCEuler().h;
+	double _ht1 = this->h;
+	////_ht1 += (_ht1 < 0 ? 360 : 0);
 	bool tmp = /*(fabs(_ran-_ht1)<0.1) &&*/ (_ran > _ht1);
 	double _ht2 = _ht1 + (tmp?1.0:-1.0) * rotSpeed * TimeMgr::deltaTime;
 	if (_ran == _ht1) _ht2 = _ht1;	
+	this->h = _ht2;
 	this->transform->rotation = CEuler(_ht2, 0, 0).ToQuaternion();
 	this->transform->position = this->transform->position + _forward() * moveSpeed * TimeMgr::deltaTime;
 

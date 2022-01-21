@@ -31,6 +31,7 @@ private:
 	//计时器
 	Timer *timerShoot, *timerCrash;
 	bool shootLeft = true;
+	float h = 0;
 
 	//绘制飞机
 	void DrawAircraft();
