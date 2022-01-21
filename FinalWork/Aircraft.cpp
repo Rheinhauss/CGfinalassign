@@ -101,7 +101,7 @@ Aircraft::Aircraft()
 	this->pattern = true;
 	//初始化目标敌机,置为空
 	this->target = nullptr;
-	this->transform->position = CVector(20, 0, 20);
+	this->transform->position = CVector(0, 0, -80);
 
 	/*
 	根据绘制的模型,设置碰撞盒范围

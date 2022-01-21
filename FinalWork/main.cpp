@@ -70,6 +70,7 @@ void Init() {
 	PlayerMgr::Player = new Aircraft();
 	PlayerMgr::timeUsed = new Timer();
 	PlayerMgr::timeUsed->start();
+	EnemyMgr::timer->start();
 }
 
 

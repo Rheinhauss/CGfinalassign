@@ -45,8 +45,8 @@ void EnemyMgr::DestroyEnemy(Enemy* e) {
 
 //初始化,开始生成一定数量敌机生成点和敌机
 void EnemyMgr::Init() {
-	new EnemySpawn(CVector(80, 0, -80));
-	new EnemySpawn(CVector(-80, 0, -80));
+	new EnemySpawn(CVector(80, 0, 80));
+	new EnemySpawn(CVector(-80, 0, 80));
 	timer->start();
 	add(); add(); add(); add();
 	add(); add(); add(); add();
