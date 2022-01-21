@@ -11,9 +11,9 @@ GLuint TextureMgr::textures[10]{};
 GLUquadricObj* TextureMgr::e_tex = gluNewQuadric();
 void TextureMgr::init() {
 		//Éú³ÉÌì¿ÕºÐ
-		SceneMgr::skybox = new SkyBox((char*)"sky.png", (char*)"sky.png",
-			(char*)"sky.png", (char*)"sky.png",
-			(char*)"sky.png", (char*)"sky.png");
+		SceneMgr::skybox = new SkyBox((char*)"sky.bmp", (char*)"sky.bmp",
+			(char*)"sky.bmp", (char*)"sky.bmp",
+			(char*)"sky.bmp", (char*)"sky.bmp");
 		SceneMgr::skybox->setSkyBox(-10, 500);
 	char name[4][10]{
 		"Sun.bmp",
