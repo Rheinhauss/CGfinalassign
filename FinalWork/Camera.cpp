@@ -35,12 +35,12 @@ void Camera::Move() {
 	if (InputManager::KEY_A) {
 		//获取摄像机的left单位向量
 		//当前位置  加上 left * moveSpeed * TimeMgr::deltaTime
-		this->transform->position = this->transform->position + _left() * moveSpeed * TimeMgr::deltaTime;
+		this->transform->position = this->transform->position - _left() * moveSpeed * TimeMgr::deltaTime;
 	}
 	if (InputManager::KEY_D) {
 		//获取摄像机的left单位向量
 		//当前位置  减去 left * moveSpeed * TimeMgr::deltaTime
-		this->transform->position = this->transform->position - _left() * moveSpeed * TimeMgr::deltaTime;
+		this->transform->position = this->transform->position + _left() * moveSpeed * TimeMgr::deltaTime;
 	}
 	if (InputManager::KEY_Q) {
 		//获取摄像机的forward单位向量
