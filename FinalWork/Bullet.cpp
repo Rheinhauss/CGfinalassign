@@ -6,8 +6,8 @@
 
 //设置射程
 double Bullet::shootRange = 100;
-
-Bullet::Bullet()
+float Bullet::size = 0.1;
+Bullet::Bullet(bool left)
 {
 	//加入 子弹 列表
 	PlayerMgr::bullets.push_back(this);
@@ -16,14 +16,20 @@ Bullet::Bullet()
 	//设置标签
 	this->tag = "bullet";
 	//设置速度
-	this->moveSpeed = 50;
+	this->moveSpeed = 70;
 	//设置发射点,用于判断是否超过射程
-	this->point = PlayerMgr::Player->transform->position;
+	
+	if (left) {
+		this->point = PlayerMgr::Player->transform->position - CVector(-0.2, 0.2, 0);
+	}
+	else {
+		this->point = PlayerMgr::Player->transform->position - CVector(0.2, 0.2, 0);
+	}
 	//初始化子弹的Transform
 	/*
 		后续可更改,将子弹放置于正确的位置与方向
 	*/
-	this->transform->position = PlayerMgr::Player->transform->position;
+	this->transform->position = this->point;
 	this->transform->rotation = PlayerMgr::Player->transform->rotation;
 	/*
 	根据绘制的模型,设置碰撞盒范围
@@ -31,7 +37,7 @@ Bullet::Bullet()
 	this->minXYZ
 	*/
 	//const float t = 0.25;
-	const float t = 0.5;
+	const float t = Bullet::size;
 	this->maxXYZ = CVector(t, t, t);
 	this->minXYZ = CVector(-t, -t, -t);
 	path = new Path;
@@ -61,7 +67,10 @@ Bullet::~Bullet()
 void Bullet::DrawBullet() {
 	//绘制子弹 + 纹理
 	glPushMatrix();
-	glutSolidSphere(0.5, 10, 10);
+	glDisable(GL_LIGHTING);
+	glColor3f(0.8, 0.3, 0.3);
+	glutSolidSphere(Bullet::size, 10, 10);
+	glEnable(GL_LIGHTING);
 	glPopMatrix();
 }
 

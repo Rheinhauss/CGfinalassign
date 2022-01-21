@@ -12,6 +12,7 @@ Camera::Camera()
 	this->tag = "Camera";
 	this->moveSpeed = 10;
 	this->rotSpeed = 10;
+	this->transform->rotation = CEuler(180, 0, 0).ToQuaternion();
 }
 
 Camera::~Camera()

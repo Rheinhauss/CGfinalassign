@@ -90,7 +90,7 @@ Aircraft::Aircraft()
 	//设置旋转速度 度/s
 	this->rotSpeed = 20;
 	//设置射击间隔 s
-	this->shootInterval = 0.2;
+	this->shootInterval = 0.1;
 	this->crashInterval = 2;//无敌时间
 	//初始化计时器
 	this->timerShoot = new Timer();
@@ -200,7 +200,7 @@ void Aircraft::Move() {
 	if (InputManager::KEY_UP) {
 		//获取当前飞机的前方单位向量 forward
 		//飞机的Transform.position += forward * moveSpeed * TimeMgr::deltaTime
-		this->transform->position = this->transform->position - _forward() * moveSpeed * TimeMgr::deltaTime;
+		this->transform->position = this->transform->position + _forward() * moveSpeed * TimeMgr::deltaTime;
 		//判断是否触及边界,即到(0,0,0)距离是否>=2500,是则pos = -pos
 		if (Object::distance(*this, CVector(0, 0, 0)) >= 2500)
 			this->transform->position = -this->transform->position;
@@ -208,7 +208,7 @@ void Aircraft::Move() {
 	if (InputManager::KEY_DOWN) {
 		//获取当前飞机的前方单位向量 forward
 		//飞机的Transform.position += -1 * forward * moveSpeed * TimeMgr::deltaTime
-		this->transform->position = this->transform->position + _forward() * moveSpeed * TimeMgr::deltaTime;
+		this->transform->position = this->transform->position - _forward() * moveSpeed * TimeMgr::deltaTime;
 		//判断是否触及边界,即到(0,0,0)距离是否>=2500,是则pos = -pos
 		if (Object::distance(*this, CVector(0, 0, 0)) >= 2500)
 			this->transform->position = -this->transform->position;
@@ -242,14 +242,16 @@ void Aircraft::Shoot() {
 	//驾驶模式
 	if (this->pattern == true && InputManager::KEY_SPACE) {
 		//发射子弹
-  		new Bullet();
+  		new Bullet(shootLeft);
+		shootLeft ^= true;
 		this->timerShoot->time = 0;
 		return;
 	}
 	//上帝视角模式
 	else if(this->pattern == false){
 		//发射子弹
-		new Bullet();
+		new Bullet(shootLeft);
+		shootLeft ^= true;
 		this->timerShoot->time = 0;
 		return;
 	}

@@ -44,13 +44,13 @@ void Object::Update() {
 	return;
 }
 CVector Object::_up() {
-	return this->transform->rotation.ToCMatrix().vecMul(CVector(0, -1, 0));
+	return this->transform->rotation.ToCMatrix().vecMul(CVector(0, 1, 0));
 }
 CVector Object::_left() {
-	return this->transform->rotation.ToCMatrix().vecMul(CVector(-1, 0, 0));
+	return this->transform->rotation.ToCMatrix().vecMul(CVector(1, 0, 0));
 }
 CVector Object::_forward() {
-	return this->transform->rotation.ToCMatrix().vecMul(CVector(0, 0, -1));
+	return this->transform->rotation.ToCMatrix().vecMul(CVector(0, 0, 1));
 }
 
 float Object::distance(Object& a, Object& b) {

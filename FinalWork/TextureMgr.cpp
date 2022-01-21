@@ -12,7 +12,7 @@ GLUquadricObj* TextureMgr::e_tex = gluNewQuadric();
 void TextureMgr::init() {
 		//Éú³ÉÌì¿ÕºÐ
 		SceneMgr::skybox = new SkyBox((char*)"sky.png", (char*)"sky.png",
-			(char*)".sky.png", (char*)"sky.png",
+			(char*)"sky.png", (char*)"sky.png",
 			(char*)"sky.png", (char*)"sky.png");
 		SceneMgr::skybox->setSkyBox(-10, 700);
 	char name[4][10]{

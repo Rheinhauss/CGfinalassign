@@ -7,13 +7,15 @@ Path::Path() {
 Path::~Path(){}
 
 void Path::Render() {
+	glDisable(GL_LIGHTING);
 	glBegin(GL_LINE_STRIP);
-	glColor3f(1, 0.5, 0.5);
-	glLineWidth(0.3);
+	glColor3f(0.4, 0.1, 0.1);
+	glLineWidth(0.01);
 	for (int i = 0; i < this->pathnodes.size(); i++) {
 		glVertex3f(this->pathnodes[i].x, this->pathnodes[i].y, this->pathnodes[i].z);
 	}
 	glEnd();
+	glEnable(GL_LIGHTING);
 }
 void Path::Update() { return; }
 
