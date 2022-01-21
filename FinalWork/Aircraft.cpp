@@ -88,7 +88,7 @@ Aircraft::Aircraft()
 	//设置移动速度 px/s
 	this->moveSpeed = 10;
 	//设置旋转速度 度/s
-	this->rotSpeed = 20;
+	this->rotSpeed = 30;
 	//设置射击间隔 s
 	this->shootInterval = 0.1;
 	this->crashInterval = 2;//无敌时间
@@ -278,22 +278,26 @@ void Aircraft::PursueTarget() {
 	rnow.Slerp(rend,0.2)
 	*/
 	//每帧变化	moveSpeed * TimeMgr::deltaTime	rotSpeed * TimeMgr::deltaTime
-	double _ran = atan2(vtmp.x, vtmp.z)/PI*180.0;
-	double _ht1 = this->transform->rotation.ToCEuler().h,
-		   _ht2 = _ht1 + rotSpeed * TimeMgr::deltaTime;
+	double _ran = -atan2(vtmp.z, vtmp.x)/PI*180.0;
+	double _ht1 = this->transform->rotation.ToCEuler().h;
+	//_ht1 += (_ht1 < 0 ? 360 : 0);
+	bool tmp = /*(fabs(_ran-_ht1)<0.1) &&*/ (_ran > _ht1);
+	double _ht2 = _ht1 + (tmp?1.0:-1.0) * rotSpeed * TimeMgr::deltaTime;
+	if (_ran == _ht1) _ht2 = _ht1;
 	this->transform->position = this->transform->position + _forward() * moveSpeed * TimeMgr::deltaTime;
-	auto t = this->transform->rotation.ToCEuler();
-	if ((_ht1 < _ran && _ran < _ht2) ||
-		(_ht2 < _ran && _ran < _ht1) ||
-		(_ht1 < _ran + 360.0 && _ran + 360.0 < _ht2) ||
-		(_ht2 < _ran + 360.0 && _ran + 360.0 < _ht1)) {
-		t.h = fmod(_ran,360.0);
-	}
-	else {
-		t.h = fmod(_ht2, 360.0);
-	}
-	if (t.h > 180)t.h = t.h - 360.0;
-	this->transform->rotation = t.ToQuaternion();
+	this->transform->rotation = CEuler(_ht2, 0, 0).ToQuaternion();
+	//auto t = this->transform->rotation.ToCEuler();
+	//if ((_ht1 < _ran && _ran < _ht2) ||
+	//	(_ht2 < _ran && _ran < _ht1) ||
+	//	(_ht1 < _ran + 360.0 && _ran + 360.0 < _ht2) ||
+	//	(_ht2 < _ran + 360.0 && _ran + 360.0 < _ht1)) {
+	//	t.h = fmod(_ran,360.0);
+	//}
+	//else {
+	//	t.h = fmod(_ht2, 360.0);
+	//}
+	//if (t.h > 180)t.h = t.h - 360.0;
+	//this->transform->rotation = t.ToQuaternion();
 
 	//发射子弹	调用this->Shoot()
 	this->Shoot();

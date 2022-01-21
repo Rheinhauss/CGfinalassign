@@ -46,7 +46,7 @@ void Sun::DrawSun() {
 	//glPushAttrib(GL_ENABLE_BIT | GL_TEXTURE_BIT);
 	glEnable(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, TextureMgr::textures[0]);
-	gluSphere(TextureMgr::e_tex, this->radius, 30, 30);
+	//gluSphere(TextureMgr::e_tex, this->radius, 30, 30);
 	glBindTexture(GL_TEXTURE_2D, 0);
 
 	glDisable(GL_TEXTURE_2D);

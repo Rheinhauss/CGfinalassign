@@ -107,6 +107,7 @@ void SetView() {
 }
 void drawCoordinates(void)
 {
+	glDisable(GL_LIGHTING);
 	glLineWidth(3.0f);
 	glColor3f(1.0f, 0.0f, 0.0f); //»­ºìÉ«µÄxÖá
 	glBegin(GL_LINES);
@@ -123,6 +124,7 @@ void drawCoordinates(void)
 	glVertex3f(0.0f, 0.0f, 0.0f);
 	glVertex3f(0.0f, 0.0f, 10.0f);
 	glEnd();
+	glEnable(GL_LIGHTING);
 }
 void myDisplay() {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
