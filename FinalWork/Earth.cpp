@@ -55,7 +55,7 @@ void Earth::DrawEarth() {
 }
 //绕太阳旋转
 void Earth::Move() {
-	pub_seta += 0.3;
+	pub_seta += 0.1;
 	this->transform->position = CVector(cos(pub_seta / 180 * PI) * distSE + Sun::pos.x,
 										0,
 										sin(pub_seta / 180 * PI) * distSE + Sun::pos.z);
@@ -65,7 +65,7 @@ void Earth::Move() {
 //自转
 void Earth::Rotate() {
 	//更改rot
-	self_seta += 0.1f;
+	self_seta += 0.5f;
 	if (self_seta >= 360) {
 		self_seta -= 360;
 	}
