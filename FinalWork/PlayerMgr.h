@@ -25,7 +25,6 @@ public:
 
 	static Camera* camera;
 
-	static bool isChasing;
 
 
 	//É¾³ý×Óµ¯

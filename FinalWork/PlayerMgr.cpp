@@ -32,8 +32,6 @@ Timer* PlayerMgr::timeUsed;
 
 Camera* PlayerMgr::camera;
 
-bool PlayerMgr::isChasing = false;
-
 //É¾³ý×Óµ¯
 void PlayerMgr::DestroyBullet(Bullet* b) {
 	DestroyMgr::add(b);
@@ -102,6 +100,7 @@ bool PlayerMgr::raypicking(int mouse_x, int mouse_y, int width, int height) {
 	if (found) {
 		cout << "found!" << endl;
 		PlayerMgr::Player->target = enemy_picked;
+		PlayerMgr::Player->isChasing = true;
 	}
 	return found;
 }

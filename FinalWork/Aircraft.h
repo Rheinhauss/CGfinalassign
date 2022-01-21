@@ -14,6 +14,8 @@ public:
 	//选中的敌机
 	Enemy *target;
 
+	bool isChasing = false;;
+
 	//override
 	void Render();
 	void Update();
