@@ -283,9 +283,10 @@ void Aircraft::PursueTarget() {
 	//_ht1 += (_ht1 < 0 ? 360 : 0);
 	bool tmp = /*(fabs(_ran-_ht1)<0.1) &&*/ (_ran > _ht1);
 	double _ht2 = _ht1 + (tmp?1.0:-1.0) * rotSpeed * TimeMgr::deltaTime;
-	if (_ran == _ht1) _ht2 = _ht1;
-	this->transform->position = this->transform->position + _forward() * moveSpeed * TimeMgr::deltaTime;
+	if (_ran == _ht1) _ht2 = _ht1;	
 	this->transform->rotation = CEuler(_ht2, 0, 0).ToQuaternion();
+	this->transform->position = this->transform->position + _forward() * moveSpeed * TimeMgr::deltaTime;
+
 	//auto t = this->transform->rotation.ToCEuler();
 	//if ((_ht1 < _ran && _ran < _ht2) ||
 	//	(_ht2 < _ran && _ran < _ht1) ||
