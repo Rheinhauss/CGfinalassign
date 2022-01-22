@@ -23,7 +23,7 @@ int EnemyMgr::maxEnemyNum = 8;
 //敌机生成时间间隔
 double EnemyMgr::timeInterval = 1;
 //敌机生成计时器
-Timer* EnemyMgr::timer = new Timer();
+Timer* EnemyMgr::timer;
 //每帧调用
 void EnemyMgr::CreateEnemy() {
 	if (EnemyMgr::curEnemyNum >= EnemyMgr::maxEnemyNum) {
@@ -47,6 +47,7 @@ void EnemyMgr::DestroyEnemy(Enemy* e) {
 void EnemyMgr::Init() {
 	new EnemySpawn(CVector(80, 0, 80));
 	new EnemySpawn(CVector(-80, 0, 80));
+	timer = new Timer();
 	timer->start();
 	add(); add(); add(); add();
 	add(); add(); add(); add();
