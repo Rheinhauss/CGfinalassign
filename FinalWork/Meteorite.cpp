@@ -24,7 +24,6 @@ Meteorite::Meteorite(MeteRange*_mr):mr(_mr)
 	this->maxXYZ
 	this->minXYZ
 	*/
-	//const float t = 0.5;
 	const float t = 1.5;
 	this->maxXYZ = CVector(t, t, t);
 	this->minXYZ = CVector(-t, -t, -t);

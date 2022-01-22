@@ -43,14 +43,9 @@ void TextureMgr::init() {
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-		//glTexGeni(GL_S, GL_TEXTURE_GEN_MODE, GL_OBJECT_LINEAR);
-		//glTexGeni(GL_T, GL_TEXTURE_GEN_MODE, GL_OBJECT_LINEAR);	
-		//float zPlane1[4] = { 0.2,0,0,0 };
-		//float zPlane2[4] = { 0,0,0.2,0 };
-		//glTexGenfv(GL_S, GL_OBJECT_PLANE, zPlane1);
-		//glTexGenfv(GL_T, GL_OBJECT_PLANE, zPlane2);
+	
 		glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);	//
-		//	glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE,GL_BLEND);
+		
 		float col[4] = { 1,1,1 };
 		glTexEnvfv(GL_TEXTURE_ENV, GL_TEXTURE_ENV_COLOR, col);	//颜色直接相乘
 		glBindTexture(GL_TEXTURE_2D, 0);

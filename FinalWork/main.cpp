@@ -1,9 +1,9 @@
 #include "engine.h"
 #include <time.h>
 #include <string>
-#include "Draw.h"
+
 /*
-	FPS:60
+	FPS:40
 */
 Camera *camera;
 time_t begin_t, finish_t;

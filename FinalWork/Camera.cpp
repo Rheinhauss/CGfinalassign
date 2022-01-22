@@ -109,7 +109,7 @@ void Camera::ChangePattern() {
 			isTrans = true;
 			PlayerMgr::Player->isChasing = false;
 			PlayerMgr::Player->target = nullptr;
-			//todo_ssh 视角切换平滑过渡
+			// 视角切换平滑过渡
 			//如果是 驾驶模式 ->上帝视角模式,将摄像机Transform设置为绝对变换
 			//置过渡态为true
 			if (PlayerMgr::Player->pattern == true) {
@@ -132,7 +132,7 @@ void Camera::ChangePattern() {
 		//目标:飞机驾驶舱位置 飞机的foward方向
 		//过渡期间更改摄像机位置和旋转
 		//到达目标后摄像机位置和旋转均置 0	(也可能会调整,使初始视角处于一个更好的位置)，置过渡态isTrans为false,会自动绑定到飞机上
-		//todo_wyx -> 确定一下目标处的位置旋转 -> 摄像机位于飞机的起始点的世界transform
+		// 确定一下目标处的位置旋转 -> 摄像机位于飞机的起始点的世界transform
 		Transform* F_target = new Transform();
 		F_target->position = PlayerMgr::Player->transform->position;
 		auto tmp = fmod(PlayerMgr::Player->transform->rotation.ToCEuler().h + 180.0, 360.0);
@@ -162,7 +162,7 @@ void Camera::ChangePattern() {
 		//目标:飞机位于屏幕中心, Z=240 摄像机前方为(0,0,-1)
 		//到达目标后,置过渡态isTrans为false
 		
-		//todo_wyx -> 确定一下目标处的位置旋转 -> 当前屏幕的中心位置的世界transform
+		// 确定一下目标处的位置旋转 -> 当前屏幕的中心位置的世界transform
 		static Transform* T_target = new Transform;
 		T_target->position = CVector(0, 200, 0);
 		T_target->rotation = CEuler(180, -90, 0).ToQuaternion();

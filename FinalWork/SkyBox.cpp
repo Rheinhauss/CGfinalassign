@@ -110,23 +110,6 @@ void SkyBox::CreateSkyBox() {
 }
 
 bool SkyBox::LoadBitMapTexture(char *filename, GLuint &texture) {
-	//AUX_RGBImageRec *pImage = NULL;
-	//pImage = auxDIBImageLoad(filename);     // 装入位图
-	//if (pImage == NULL)
-	//	return false;     // 位图没装入返回错误
-	//glGenTextures(1, &texture);             // 生成贴图(纹理)
-	//glBindTexture(GL_TEXTURE_2D, texture);// 绑定贴图
-	//									  //gluBuild2DMipmaps支持任意分辨率位图文件
-	//gluBuild2DMipmaps(GL_TEXTURE_2D, 4,   //
-	//	pImage->sizeX,     // 图形宽
-	//	pImage->sizeY,     // 图形高
-	//	GL_RGB, GL_UNSIGNED_BYTE,
-	//	pImage->data       // 图形数据
-	//	);
-	//free(pImage->data);                  // 释放位图数据占据的内存资源
-	//free(pImage);
-	//return true;                         // 返回成功
-
 	CImage img;
 	HRESULT hResult = img.Load(filename);
 	if (FAILED(hResult))

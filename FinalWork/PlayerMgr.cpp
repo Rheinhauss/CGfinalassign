@@ -27,7 +27,7 @@ int PlayerMgr::colMeteNum = 0;
 int PlayerMgr::colEnemyNum = 0;
 //击中敌机次数
 int PlayerMgr::hitEnemyNum = 0;
-
+//游戏开始后经过时间
 Timer* PlayerMgr::timeUsed;
 
 Camera* PlayerMgr::camera;
@@ -82,18 +82,12 @@ bool PlayerMgr::raypicking(int mouse_x, int mouse_y, int width, int height) {
 		// if tmax < 0, ray (line) is intersecting AABB, but whole AABB is behinding us
 		if (tmax < 0) {
 			continue;
-			//return false;
 		}
 
 		// if tmin > tmax, ray doesn't intersect AABB
 		if (tmin > tmax) {
 			continue;
-			//return false;
 		}
-		//if (tmin < 0.0f) {
-		//	return true;
-		//}
-		//return true;
 		found = true;
 		enemy_picked = e;
 	}

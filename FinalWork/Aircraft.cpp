@@ -135,7 +135,7 @@ void Aircraft::DrawAircraft() {
 	//glVertex3f(0, 0, 100);
 	//glEnd();
 
-	glutWireCube(1.0);
+	//glutWireCube(1.0);
 	static float i = 0;
 	i += 1;
 	if (fabsf(i - 360) < 0.4f)

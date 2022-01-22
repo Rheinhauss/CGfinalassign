@@ -55,12 +55,12 @@ void Sun::DrawSun() {
 	//glutSolidSphere(this->radius, 100, 100);
 	//Sphere::Draw(this->radius, 100, 100, TextureMgr::textures[0]);
 	glPopMatrix();
-	//todo
+	
 	return;
 }
 //在太阳位置处设置光源
 void Sun::SetLight() {
-	//todo
+	//在别处已经单独实现
 	return;
 }
 CVector Sun::pos = CVector(0, 0, 0);
