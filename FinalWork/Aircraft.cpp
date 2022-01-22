@@ -102,14 +102,16 @@ Aircraft::Aircraft()
 	//初始化目标敌机,置为空
 	this->target = nullptr;
 	this->transform->position = CVector(0, 0, -80);
+	this->transform->scale = CVector(3, 3, 3);
 
 	/*
 	根据绘制的模型,设置碰撞盒范围
 	this->maxXYZ
 	this->minXYZ
 	*/
-	this->maxXYZ = CVector(+0.5, +0.5, +0.5);
-	this->minXYZ = CVector(-0.5, -0.5, -0.5);
+	auto t = 3.0 * 0.5;
+	this->maxXYZ = CVector(+t, +t, +t);
+	this->minXYZ = CVector(-t, -t, -t);
 
 }
 

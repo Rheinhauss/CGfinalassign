@@ -190,7 +190,8 @@ void myDisplay() {
 	glPopMatrix();
 
 	//begin ÆÁÄ»¿Õ¼äÎÄ×ÖÏÔÊ¾
-	string s = "enemy hit: " + to_string(PlayerMgr::hitEnemyNum)
+	string s = "SCORE: " + to_string(PlayerMgr::hitEnemyNum-PlayerMgr::colMeteNum)
+		+ "    enemy hit: " + to_string(PlayerMgr::hitEnemyNum)
 		+ "    meteor crash: " + to_string(PlayerMgr::colMeteNum)
 		+ "    time now: " + to_string(PlayerMgr::timeUsed->time);
 	glMatrixMode(GL_PROJECTION);

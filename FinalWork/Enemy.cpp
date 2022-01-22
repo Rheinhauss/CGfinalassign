@@ -4,6 +4,7 @@
 #include "TimeMgr.h"
 #include "glut.h"
 #include "PlayerMgr.h"
+#include "TextureMgr.h"
 
 Enemy::Enemy()
 {
@@ -90,7 +91,16 @@ void Enemy::DrawEnemy() {
 	glPushMatrix();
 	glColor3f(1, 0, 0);
 	glRotatef(90, 0, 1, 0);
+	glEnable(GL_TEXTURE_2D);
+	glBindTexture(GL_TEXTURE_2D, TextureMgr::textures[3]);
+	glEnable(GL_TEXTURE_GEN_S);
+	glEnable(GL_TEXTURE_GEN_T);
+	glFrontFace(GL_CW);
 	glutSolidCone(3, 6, 10, 10);
+	glDisable(GL_TEXTURE_GEN_S);
+	glDisable(GL_TEXTURE_GEN_T);
+	glDisable(GL_TEXTURE_2D);
+	glFrontFace(GL_CCW);
 	glPopMatrix();
 
 }
